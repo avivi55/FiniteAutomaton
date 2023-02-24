@@ -5,7 +5,7 @@ import tabulate
 
 
 class Automata:
-    def __init__(self, path="automata"):
+    def __init__(self, path="automata.gv"):
         self.entrees: list[str] = []
         self.exits: list[str] = []
         self.transitions: dict[str, list[list[str, str]]] = {}
