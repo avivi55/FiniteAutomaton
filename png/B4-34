@@ -1,0 +1,18 @@
+digraph finite_state_machine { rankdir=LR
+	node [shape=doublecircle]
+	6
+
+	node [shape=circle]
+	fake0 [style=invisible]
+	fake0 -> 0
+
+	0 -> 1 [label="E"] 
+	0 -> 4 [label="E"] 
+	1 -> 2 [label="E, a"] 
+	3 -> 2 [label="E"] 
+	3 -> 6 [label="E"] 
+	5 -> 4 [label="E"] 
+	5 -> 6 [label="E"] 
+	2 -> 3 [label="b"] 
+	4 -> 5 [label="b"] 
+}

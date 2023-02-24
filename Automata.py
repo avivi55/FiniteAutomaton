@@ -26,7 +26,7 @@ class Automata:
         return tabulate.tabulate(table, headers, tablefmt="rounded_grid")
 
     def __repr__(self):
-        graphviz.Source(self.to_dot_format()).view(filename=self.path)
+        graphviz.Source(self.to_dot_format(), filename=f'render/{self.path}.gv').render(filename=f'png/{self.path}', format='png', view=False)
         return str(self)
 
     def __eq__(self, other):
@@ -62,12 +62,12 @@ class Automata:
 
         to_dot += '\n'
 
+        to_dot += "\tnode [shape=circle]\n"
         for idx, entree in enumerate(self.entrees):
             to_dot += f"\tfake{str(idx)} [style=invisible]\n\tfake{str(idx)} -> {str(entree)}\n"
 
         to_dot += '\n'
 
-        to_dot += "\tnode [shape=circle]\n"
         for state, transitions in self.transitions.items():
             trans_dict = {}
 
@@ -92,18 +92,30 @@ class Automata:
             self.entrees = fa_data[2][:-1].split(' ')[1:]
             self.exits = fa_data[3][:-1].split(' ')[1:]
 
-            states = []
             for line in fa_data[5:]:
-                states.append(line[0])
-                states.append(line[2])
+                line = line[:-1] if line[-1] == '\n' else line
+                key = ''
+                pos = 0
+                for i, val in enumerate(line):
+                    if val in string.ascii_letters:
+                        pos = i
+                        break
+                    key += val
 
-            states = sorted(list(set(states)))
+                if self.transitions.get(str(key)):
+                    self.transitions[str(key)] += [[line[pos], line[pos + 1:]]]
+                else:
+                    self.transitions[str(key)] = [[line[pos], line[pos + 1:]]]
 
-            for state in states:
-                self.transitions[str(state)] = []
+        if not len(self.transitions):
+            if len(self.entrees):
+                for i in self.entrees:
+                    self.transitions[i] = []
 
-            for line in fa_data[5:]:
-                self.transitions[str(line[0])] += [[line[1], line[2]]]
+        if not len(self.transitions):
+            if len(self.exits):
+                for i in self.exits:
+                    self.transitions[i] = []
 
     def is_standard(self):
         if len(self.entrees) != 1:
@@ -156,12 +168,33 @@ class Automata:
         return complete
 
     def is_determinate(self):
-        pass
-        # TODO
+        if len(self.entrees) != 1:
+            return False
+
+        for x in self.transitions.values():
+            lst = []
+            for y in x:
+                if len(y) >= 2:
+                    lst.append(y[0])
+
+            s = list(set(lst))
+            if len(s) != len(lst):
+                return False
+
+        return True
 
     def determinize(self):
-        return self
-        # TODO
+        if self.is_determinate():
+            if self.complete():
+                return self
+            else:
+                return self.complete()
+
+        determinate = deepcopy(self)
+
+
+
+        return determinate
 
     def is_miniminized(self):
         pass

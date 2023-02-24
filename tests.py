@@ -1,7 +1,10 @@
 from Automata import Automata
 
-t = Automata()
 
-current_automata = "B4-0.txt"
-t.populate_from_file(current_automata)
-print(repr(t))
+
+for i in range(45):
+    t = Automata()
+    current_automata = f"automaton/B4-{i}.txt"
+    t.path = f"B4-{i}"
+    t.populate_from_file(current_automata)
+    repr(t)

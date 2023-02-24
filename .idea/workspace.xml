@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="gitignore">
+      <change afterPath="$PROJECT_DIR$/automaton/B4-1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-10.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-11.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-12.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-13.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-14.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-15.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-16.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-17.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-18.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-19.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-20.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-21.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-22.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-23.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-24.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-25.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-26.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-27.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-28.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-29.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-30.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-31.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-32.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-33.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-34.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-35.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-36.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-37.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-38.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-39.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-4.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-40.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-41.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-42.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-43.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-44.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-6.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-7.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-8.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/automaton/B4-9.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automata.py" beforeDir="false" afterPath="$PROJECT_DIR$/Automata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/B4-0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/automaton/B4-0.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2M9sahcLeP1MercG1txHq3vXhJ2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.splitter.proportion": "0.30692077",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "PLAIN_TEXT"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/automaton" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.tests">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="L2FiniteAutomaton" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.10" />
+      <option name="SDK_NAME" value="/usr/bin/python3.10" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tests" type="PythonConfigurationType" factoryName="Python">
+      <module name="L2FiniteAutomaton" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.10" />
+      <option name="SDK_NAME" value="/usr/bin/python3.10" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.tests" />
+      <item itemvalue="Python.main" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="" />
+      <created>1677191197776</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1677191197776</updated>
+      <workItem from="1677191198911" duration="67000" />
+      <workItem from="1677191276018" duration="70000" />
+      <workItem from="1677191355614" duration="46000" />
+      <workItem from="1677191408112" duration="27811000" />
+      <workItem from="1677238301248" duration="1407000" />
+      <workItem from="1677240273293" duration="15459000" />
+    </task>
+    <task id="LOCAL-00001" summary="added main loop, better formating">
+      <created>1677231392963</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1677231392963</updated>
+    </task>
+    <task id="LOCAL-00002" summary="tests.py added, fixed bugs in populate and double arrow bug fixed">
+      <created>1677237912452</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1677237912452</updated>
+    </task>
+    <task id="LOCAL-00003" summary="gitignore">
+      <created>1677238446772</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1677238446772</updated>
+    </task>
+    <task id="LOCAL-00004" summary="gitignore">
+      <created>1677238473913</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1677238473913</updated>
+    </task>
+    <task id="LOCAL-00005" summary="gitignore">
+      <created>1677238507269</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1677238507269</updated>
+    </task>
+    <task id="LOCAL-00006" summary="gitignore">
+      <created>1677238592185</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1677238592185</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added main loop, better formating" />
+    <MESSAGE value="tests.py added, fixed bugs in populate and double arrow bug fixed" />
+    <MESSAGE value="gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="gitignore" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$main.coverage" NAME="main Coverage Results" MODIFIED="1677240362043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$tests.coverage" NAME="tests Coverage Results" MODIFIED="1677260484932" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
