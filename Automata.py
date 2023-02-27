@@ -1,32 +1,44 @@
 import graphviz
-import string
-from copy import deepcopy
 import tabulate
+import string
+import os
+from copy import deepcopy
 
 
 class Automata:
-    def __init__(self, path="automata.gv"):
+    def __init__(self, source_file="automaton/B0-0.txt", output_file="automata", out_type="gif"):
         self.entrees: list[str] = []
         self.exits: list[str] = []
-        self.transitions: dict[str, list[list[str, str]]] = {}
+        self.transitions: dict[str, dict[str, list[str]]] = {}
         self.alphabet: list[str] = []
-        self.path = path
+        self.source = source_file
+        self.output = output_file
+        self.format = out_type
+
+        self.alt_trans = {}
+        self.__populate_from_file__(self.source)
 
     def __str__(self):
-        headers = [
-            "E/S",
-            "État",
+        headers = ["E/S", "État"] + self.alphabet
+        table = [
+            [
+                self.__give_state_behaviour__(k),
+                k,
+            ] + [','.join(self.__fetch_transition__(k, x)) for x in self.alphabet]
+            for k in self.transitions.keys()
         ]
-        headers += self.alphabet
-        table = []
-
-        for k, v in self.transitions.items():
-            table.append([self.__state_is_e_s(k)] + [k] + [self.__fetch_transition(k, x) for x in self.alphabet])
 
         return tabulate.tabulate(table, headers, tablefmt="rounded_grid")
 
     def __repr__(self):
-        graphviz.Source(self.to_dot_format(), filename=f'render/{self.path}.gv').render(filename=f'png/{self.path}', format='png', view=False)
+        try:
+            os.mkdir("out")
+            os.mkdir("dot")
+        except:
+            pass
+
+        graphviz.Source(self.to_dot_format()) \
+            .render(filename=f'dot/{self.output}.dot', outfile=f'out/{self.output}.{self.format}', view=True)
         return str(self)
 
     def __eq__(self, other):
@@ -34,8 +46,8 @@ class Automata:
             and self.entrees == other.entrees \
             and self.exits == other.exists
 
-    def __state_is_e_s(self, state: str):
-        res = " "
+    def __give_state_behaviour__(self, state: str):
+        res = ""
 
         if state in self.entrees:
             res += "E "
@@ -45,13 +57,55 @@ class Automata:
 
         return res
 
-    def __fetch_transition(self, start_state: str, trans: str):
-        res = "."
-        for transition in self.transitions[start_state]:
-            if transition[0] == trans:
-                res = transition[1]
-                break
-        return res
+    def __fetch_transition__(self, state: str, trans: str):
+        return self.transitions.get(state).get(trans) or []
+
+    def __populate_from_file__(self, path: str = "B4-0.txt"):
+        with open(path, 'r') as f:
+            fa_data = f.readlines()
+
+            self.alphabet = list(string.ascii_lowercase[:int(fa_data[0])])
+
+            self.entrees = fa_data[2][:-1].split(' ')[1:]
+            self.exits = fa_data[3][:-1].split(' ')[1:]
+
+            for line in fa_data[5:]:
+                line = line[:-1] if line[-1] == '\n' else line
+                state = ''
+                pos = 0
+                for i, val in enumerate(line):
+                    if val in string.ascii_letters + 'ε':
+                        pos = i
+                        break
+                    state += val
+
+                if self.transitions.get(str(state)):
+                    if self.transitions.get(str(state)).get(str(line[pos])):
+                        self.transitions[str(state)][line[pos]].append(line[pos + 1:])
+                    else:
+                        self.transitions[str(state)][line[pos]] = [line[pos + 1:]]
+                else:
+                    self.transitions[str(state)] = {line[pos]: [line[pos + 1:]]}
+
+        if not len(self.transitions):
+            if len(self.entrees):
+                for i in self.entrees:
+                    self.transitions[i] = {}
+
+        if not len(self.transitions):
+            if len(self.exits):
+                for i in self.exits:
+                    self.transitions[i] = {}
+
+        return self.transitions
+
+    def is_e_nfa(self):
+        for state, transitions in self.transitions.items():
+            for trans in transitions:
+                if 'E' or 'ε' in trans:
+                    return True
+
+        return False
 
     def to_dot_format(self):
         to_dot = "digraph finite_state_machine { rankdir=LR\n"
@@ -68,54 +122,24 @@ class Automata:
 
         to_dot += '\n'
 
+        dic = {}
         for state, transitions in self.transitions.items():
-            trans_dict = {}
+            dic[state] = {}
+            for k, v in transitions.items():
+                for i in v:
+                    if dic[state].get(i):
+                        dic[state][i].append(k)
+                    else:
+                        dic[state][i] = [k]
 
-            for transition in transitions:
-                trans_dict[transition[1]] = []
+        print(dic)
 
-            for transition in transitions:
-                trans_dict[transition[1]].append(transition[0])
-
-            for k, v in trans_dict.items():
+        for state, transitions in dic.items():
+            for k, v in transitions.items():
                 to_dot += f"\t{str(state)} -> {str(k)} [label=\"{str(', '.join(v))}\"] \n"
 
         to_dot += "}"
         return to_dot
-
-    def populate_from_file(self, path: str = "B4-0.txt"):
-        with open(path, 'r') as f:
-            fa_data = f.readlines()
-
-            self.alphabet = list(string.ascii_lowercase[:int(fa_data[0])])
-
-            self.entrees = fa_data[2][:-1].split(' ')[1:]
-            self.exits = fa_data[3][:-1].split(' ')[1:]
-
-            for line in fa_data[5:]:
-                line = line[:-1] if line[-1] == '\n' else line
-                key = ''
-                pos = 0
-                for i, val in enumerate(line):
-                    if val in string.ascii_letters:
-                        pos = i
-                        break
-                    key += val
-
-                if self.transitions.get(str(key)):
-                    self.transitions[str(key)] += [[line[pos], line[pos + 1:]]]
-                else:
-                    self.transitions[str(key)] = [[line[pos], line[pos + 1:]]]
-
-        if not len(self.transitions):
-            if len(self.entrees):
-                for i in self.entrees:
-                    self.transitions[i] = []
-
-        if not len(self.transitions):
-            if len(self.exits):
-                for i in self.exits:
-                    self.transitions[i] = []
 
     def is_standard(self):
         if len(self.entrees) != 1:
@@ -133,21 +157,24 @@ class Automata:
             return self
 
         standard = deepcopy(self)
-        new_start_trans = []
+        dic = {}
+        for i in [standard.transitions.get(x) for x in standard.entrees]:
+            for k, v in i.items():
+                if dic.get(k):
+                    dic[k] += v
+                else:
+                    dic[k] = v
+                dic[k] = list(set(dic[k]))
 
-        for i in [standard.transitions[x] for x in standard.entrees]:
-            for j in i:
-                new_start_trans.append(j)
-
+        standard.transitions["I"] = dic
         standard.entrees = ['I']
 
-        standard.transitions['I'] = new_start_trans
         return standard
 
     def is_complete(self):
         for state in self.transitions.keys():
             for letter in self.alphabet:
-                if self.__fetch_transition(state, letter) == ".":
+                if not self.__fetch_transition__(state, letter):
                     return False
         return True
 
@@ -162,7 +189,7 @@ class Automata:
 
         for state in self.transitions.keys():
             for letter in self.alphabet:
-                if self.__fetch_transition(state, letter) == ".":
+                if not self.__fetch_transition__(state, letter):
                     complete.transitions[state].append([letter, 'P'])
 
         return complete
@@ -192,9 +219,21 @@ class Automata:
 
         determinate = deepcopy(self)
 
-
-
         return determinate
+
+    def test_word(self, word):
+        if False in [letter in self.alphabet + ['E'] for letter in word]:
+            return False
+
+        if not self.is_determinate():
+            return False
+
+        cur_state = self.entrees[0]
+
+        for i, letter in enumerate(word):
+            next_state = self.__fetch_transition__(cur_state, letter)
+
+            cur_state = next_state
 
     def is_miniminized(self):
         pass

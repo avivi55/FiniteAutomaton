@@ -4,54 +4,106 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="gitignore">
-      <change afterPath="$PROJECT_DIR$/automaton/B4-1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-10.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-11.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-12.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-13.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-14.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-15.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-16.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-17.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-18.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-19.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-20.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-21.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-22.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-23.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-24.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-25.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-26.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-27.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-28.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-29.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-3.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-30.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-31.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-32.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-33.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-34.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-35.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-36.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-37.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-38.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-39.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-4.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-40.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-41.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-42.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-43.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-44.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-5.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-6.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-7.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-8.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/automaton/B4-9.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="I finally probably did it, good lord help me">
+      <change afterPath="$PROJECT_DIR$/.idea/L2FiniteAutomaton.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AutomataAnimation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Automata.py" beforeDir="false" afterPath="$PROJECT_DIR$/Automata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B4-0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/automaton/B4-0.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/automaton/B4-31.txt" beforeDir="false" afterPath="$PROJECT_DIR$/automaton/B4-31.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/automaton/B4-32.txt" beforeDir="false" afterPath="$PROJECT_DIR$/automaton/B4-32.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/automaton/B4-33.txt" beforeDir="false" afterPath="$PROJECT_DIR$/automaton/B4-33.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/automaton/B4-34.txt" beforeDir="false" afterPath="$PROJECT_DIR$/automaton/B4-34.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/automaton/B4-35.txt" beforeDir="false" afterPath="$PROJECT_DIR$/automaton/B4-35.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-10" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-11" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-12" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-13" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-14" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-15" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-16" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-17" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-18" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-19" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-20" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-21" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-22" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-23" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-24" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-25" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-26" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-26.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-27" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-27.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-28" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-28.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-29" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-29.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-30" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-30.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-31" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-31.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-32" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-33" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-33.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-34" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-34.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-35" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-35.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-36" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-36.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-37" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-37.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-38" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-38.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-39" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-39.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-40" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-40.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-41" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-41.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-42" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-42.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-43" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-43.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-44" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-44.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/png/B4-9.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,26 +138,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "settings.editor.splitter.proportion": "0.30692077",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.30692077&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "PLAIN_TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;PLAIN_TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/automaton" />
@@ -176,7 +229,9 @@
       <workItem from="1677191355614" duration="46000" />
       <workItem from="1677191408112" duration="27811000" />
       <workItem from="1677238301248" duration="1407000" />
-      <workItem from="1677240273293" duration="15459000" />
+      <workItem from="1677240273293" duration="37000000" />
+      <workItem from="1677402594164" duration="10460000" />
+      <workItem from="1677507580516" duration="3139000" />
     </task>
     <task id="LOCAL-00001" summary="added main loop, better formating">
       <created>1677231392963</created>
@@ -220,7 +275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677238592185</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="I finally probably did it, good lord help me">
+      <created>1677260923515</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1677260923515</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,10 +303,11 @@
     <MESSAGE value="added main loop, better formating" />
     <MESSAGE value="tests.py added, fixed bugs in populate and double arrow bug fixed" />
     <MESSAGE value="gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="gitignore" />
+    <MESSAGE value="I finally probably did it, good lord help me" />
+    <option name="LAST_COMMIT_MESSAGE" value="I finally probably did it, good lord help me" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/L2FiniteAutomaton$main.coverage" NAME="main Coverage Results" MODIFIED="1677240362043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$tests.coverage" NAME="tests Coverage Results" MODIFIED="1677260484932" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$tests.coverage" NAME="tests Coverage Results" MODIFIED="1677510716411" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
