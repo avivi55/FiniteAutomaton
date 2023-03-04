@@ -6,7 +6,7 @@ from copy import deepcopy
 
 
 class Automata:
-    def __init__(self, source_file="automaton/B0-0.txt", output_file="automata", out_type="gif"):
+    def __init__(self, source_file="", output_file="automata", out_type="gif"):
         self.entrees: list[str] = []
         self.exits: list[str] = []
         self.transitions: dict[str, dict[str, list[str]]] = {}
@@ -16,7 +16,9 @@ class Automata:
         self.format = out_type
 
         self.alt_trans = {}
-        self.__populate_from_file__(self.source)
+
+        if source_file:
+            self.__populate_from_file__(self.source)
 
     def __str__(self):
         headers = ["E/S", "État"] + self.alphabet
@@ -60,7 +62,7 @@ class Automata:
     def __fetch_transition__(self, state: str, trans: str):
         return self.transitions.get(state).get(trans) or []
 
-    def __populate_from_file__(self, path: str = "B4-0.txt"):
+    def __populate_from_file__(self, path: str):
         with open(path, 'r') as f:
             fa_data = f.readlines()
 
@@ -79,13 +81,14 @@ class Automata:
                         break
                     state += val
 
-                if self.transitions.get(str(state)):
-                    if self.transitions.get(str(state)).get(str(line[pos])):
-                        self.transitions[str(state)][line[pos]].append(line[pos + 1:])
+                if self.transitions.get(state):
+                    if self.transitions.get(state).get(line[pos]):
+                        self.transitions[state][line[pos]].append(line[pos + 1:])
+                        self.transitions[state][line[pos]].sort()
                     else:
-                        self.transitions[str(state)][line[pos]] = [line[pos + 1:]]
+                        self.transitions[state][line[pos]] = [line[pos + 1:]]
                 else:
-                    self.transitions[str(state)] = {line[pos]: [line[pos + 1:]]}
+                    self.transitions[state] = {line[pos]: [line[pos + 1:]]}
 
         if not len(self.transitions):
             if len(self.entrees):
@@ -98,6 +101,18 @@ class Automata:
                     self.transitions[i] = {}
 
         return self.transitions
+
+    def __different_transitions_dict__(self):
+        dic = {}
+        for state, transitions in self.transitions.items():
+            dic[state] = {}
+            for k, v in transitions.items():
+                for i in v:
+                    if dic[state].get(i):
+                        dic[state][i].append(k)
+                    else:
+                        dic[state][i] = [k]
+        return dic
 
     def is_e_nfa(self):
         for state, transitions in self.transitions.items():
@@ -122,19 +137,7 @@ class Automata:
 
         to_dot += '\n'
 
-        dic = {}
-        for state, transitions in self.transitions.items():
-            dic[state] = {}
-            for k, v in transitions.items():
-                for i in v:
-                    if dic[state].get(i):
-                        dic[state][i].append(k)
-                    else:
-                        dic[state][i] = [k]
-
-        print(dic)
-
-        for state, transitions in dic.items():
+        for state, transitions in self.__different_transitions_dict__().items():
             for k, v in transitions.items():
                 to_dot += f"\t{str(state)} -> {str(k)} [label=\"{str(', '.join(v))}\"] \n"
 
@@ -183,14 +186,15 @@ class Automata:
             return self
 
         complete = deepcopy(self)
-        garbage = [['a', 'P'], ['b', 'P']]
+        garbage = {'a': ['P'],
+                   'b': ['P']}
 
         complete.transitions['P'] = garbage
 
         for state in self.transitions.keys():
             for letter in self.alphabet:
                 if not self.__fetch_transition__(state, letter):
-                    complete.transitions[state].append([letter, 'P'])
+                    complete.transitions[state][letter] = ['P']
 
         return complete
 
@@ -198,31 +202,101 @@ class Automata:
         if len(self.entrees) != 1:
             return False
 
-        for x in self.transitions.values():
-            lst = []
-            for y in x:
-                if len(y) >= 2:
-                    lst.append(y[0])
-
-            s = list(set(lst))
-            if len(s) != len(lst):
-                return False
+        for transition in self.transitions.values():
+            for label, states in transition.items():
+                if len(states) > 1:
+                    return False
 
         return True
 
-    def determinize(self):
+    def determinize(self, print_steps=False):
         if self.is_determinate():
             if self.complete():
                 return self
             else:
                 return self.complete()
 
-        determinate = deepcopy(self)
+        determinate = Automata()
+        determinate.alphabet = self.alphabet.copy()
+
+        # unite the entrees
+        new_entree = {}
+        for i in self.entrees:
+            for k in self.transitions.get(i):
+                if new_entree.get(k):
+                    new_entree[k] += self.transitions.get(i).get(k).copy()
+                else:
+                    new_entree[k] = self.transitions.get(i).get(k).copy()
+
+                new_entree[k] = sorted(list(set(new_entree[k])))
+
+        for k, v in new_entree.items():
+            new_entree[k] = ['-'.join(v)]
+
+
+        new_entree = {'-'.join(self.entrees): new_entree}
+
+        ###
+
+        # populate the transitions dict
+        determinate.entrees = list(new_entree.keys())
+        determinate.exits = []
+
+        for i in self.entrees:
+            if i in self.exits:
+                determinate.exits.append('-'.join(self.entrees))
+
+
+        determinate.transitions = new_entree
+
+        state_buffer = []
+        for x in new_entree.values():
+            for y in x.values():
+                state_buffer += y
+
+        state_buffer = list(set(state_buffer))
+
+        while state_buffer:
+            cur_state = state_buffer.pop()
+
+            determinate.transitions[cur_state] = {}
+
+            if self.transitions.get(cur_state):
+                for k, v in self.transitions.get(cur_state).items():
+                    determinate.transitions[cur_state][k] = ['-'.join(v)]
+
+                if cur_state in self.exits:
+                    determinate.exits.append(cur_state)
+
+            elif not determinate.transitions.get(cur_state):
+                states = list(set(cur_state.split('-')))
+
+                print(states)
+
+                for letter in determinate.alphabet:
+                    determinate.transitions.get(cur_state)[letter] = []
+
+                for i in states:
+                    for k, v in self.transitions.get(i).items():
+                        print("vv", v)
+                        determinate.transitions.get(cur_state)[k] += v
+
+
+
+
+            #print(determinate.transitions.get(cur_state))
+            for x in determinate.transitions.get(cur_state).values():
+                y = '-'.join(x)
+                print('y', cur_state, y)
+                if y and (y not in determinate.transitions.keys()):
+                    state_buffer.append(y)
+
+        #        print(state_buffer, new_entree)
 
         return determinate
 
     def test_word(self, word):
-        if False in [letter in self.alphabet + ['E'] for letter in word]:
+        if False in [letter in self.alphabet + ['E', 'ε'] for letter in word]:
             return False
 
         if not self.is_determinate():
