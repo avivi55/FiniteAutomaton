@@ -127,19 +127,19 @@ class Automata:
 
         to_dot += "\tnode [shape=doublecircle]\n"
         for exit_ in self.exits:
-            to_dot += f"\t{str(exit_)}\n"
+            to_dot += f"\t{''.join(exit_.split('-'))}\n"
 
         to_dot += '\n'
 
         to_dot += "\tnode [shape=circle]\n"
         for idx, entree in enumerate(self.entrees):
-            to_dot += f"\tfake{str(idx)} [style=invisible]\n\tfake{str(idx)} -> {str(entree)}\n"
+            to_dot += f"\tfake{str(idx)} [style=invisible]\n\tfake{str(idx)} -> {''.join(entree.split('-'))}\n"
 
         to_dot += '\n'
 
         for state, transitions in self.__different_transitions_dict__().items():
             for k, v in transitions.items():
-                to_dot += f"\t{str(state)} -> {str(k)} [label=\"{str(', '.join(v))}\"] \n"
+                to_dot += f"\t{''.join(state.split('-'))} -> {''.join(k.split('-'))} [label=\"{str(', '.join(v))}\"] \n"
 
         to_dot += "}"
         return to_dot
@@ -233,7 +233,6 @@ class Automata:
         for k, v in new_entree.items():
             new_entree[k] = ['-'.join(v)]
 
-
         new_entree = {'-'.join(self.entrees): new_entree}
 
         ###
@@ -246,8 +245,7 @@ class Automata:
             if i in self.exits:
                 determinate.exits.append('-'.join(self.entrees))
 
-
-        determinate.transitions = new_entree
+        determinate.transitions = deepcopy(new_entree)
 
         state_buffer = []
         for x in new_entree.values():
@@ -259,39 +257,39 @@ class Automata:
         while state_buffer:
             cur_state = state_buffer.pop()
 
-            determinate.transitions[cur_state] = {}
+            det_tr = determinate.transitions
+
+            det_tr[cur_state] = {}
 
             if self.transitions.get(cur_state):
                 for k, v in self.transitions.get(cur_state).items():
-                    determinate.transitions[cur_state][k] = ['-'.join(v)]
+                    det_tr[cur_state][k] = ['-'.join(v)]
 
                 if cur_state in self.exits:
                     determinate.exits.append(cur_state)
 
-            elif not determinate.transitions.get(cur_state):
+            elif not det_tr.get(cur_state):
                 states = list(set(cur_state.split('-')))
 
-                print(states)
-
                 for letter in determinate.alphabet:
-                    determinate.transitions.get(cur_state)[letter] = []
+                    det_tr.get(cur_state)[letter] = []
 
                 for i in states:
                     for k, v in self.transitions.get(i).items():
-                        print("vv", v)
-                        determinate.transitions.get(cur_state)[k] += v
+                        temp = det_tr.get(cur_state)[k]
+                        temp += v
+                        det_tr.get(cur_state)[k] = list(set(temp))
+                        for j in det_tr.get(cur_state)[k]:
+                            if j in self.exits:
+                                determinate.exits.append(cur_state)
 
-
-
-
-            #print(determinate.transitions.get(cur_state))
-            for x in determinate.transitions.get(cur_state).values():
+            for x in det_tr.get(cur_state).values():
                 y = '-'.join(x)
-                print('y', cur_state, y)
-                if y and (y not in determinate.transitions.keys()):
+                if y and (y not in det_tr.keys()) and y not in state_buffer:
                     state_buffer.append(y)
 
-        #        print(state_buffer, new_entree)
+            for k, v in det_tr.get(cur_state).items():
+                det_tr.get(cur_state)[k] = ['-'.join(v)]
 
         return determinate
 

@@ -8,7 +8,7 @@ for i in range(1):
     print(i)
     print(t)
     print(t.determinize())
-    # print(t)
+    repr(t.determinize())
 
     # AutomataAnimation.standardize_animation(t)
     # print(f"{i} :")

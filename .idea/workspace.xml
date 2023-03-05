@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="additional changes, `self.transition` changed and printing fixed">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="still broken, but better">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Automata.py" beforeDir="false" afterPath="$PROJECT_DIR$/Automata.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests.py" afterDir="false" />
@@ -139,6 +138,8 @@
       <workItem from="1677507580516" duration="16168000" />
       <workItem from="1677573880756" duration="9548000" />
       <workItem from="1677835796168" duration="5886000" />
+      <workItem from="1677948065030" duration="622000" />
+      <workItem from="1678031935119" duration="5805000" />
     </task>
     <task id="LOCAL-00001" summary="added main loop, better formating">
       <created>1677231392963</created>
@@ -196,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677511996627</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="still broken, but better">
+      <created>1677948087127</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1677948087127</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,21 +227,11 @@
     <MESSAGE value="gitignore" />
     <MESSAGE value="I finally probably did it, good lord help me" />
     <MESSAGE value="additional changes, `self.transition` changed and printing fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="additional changes, `self.transition` changed and printing fixed" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Automata.py</url>
-          <line>280</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="still broken, but better" />
+    <option name="LAST_COMMIT_MESSAGE" value="still broken, but better" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/L2FiniteAutomaton$main.coverage" NAME="main Coverage Results" MODIFIED="1677240362043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$tests.coverage" NAME="tests Coverage Results" MODIFIED="1677843106197" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$tests.coverage" NAME="tests Coverage Results" MODIFIED="1678038001675" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
