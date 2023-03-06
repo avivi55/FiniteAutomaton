@@ -6,27 +6,68 @@ from copy import deepcopy
 
 
 class Automata:
+    """
+    A class to represent an automata.
+
+    Attributes
+    ----------
+    entrees
+        list of initial states
+
+    exits
+        list of terminal states
+
+    alphabet
+        list of letter making the alphabet of the automata
+
+    source
+        a path for the .txt file the automata will get its transitions
+
+    output
+        the name of the output files
+
+    format
+        the format output (.gif, .png ...)
+
+    transitions
+        the transition dictionary
+        it is composed as such:
+        {
+            'state1' : {
+                'letter1' : [ 'state2', 'state1' ],
+                'letter2' : [ 'state3' ],
+            },
+            'state2' : {
+                'letter1' : [],
+                'letter2' : [ 'state3' ]
+            },
+            'state3' : {
+                'letter1' : [ 'state3' ],
+                'letter2' : [],
+            },
+        }
+    """
+
     def __init__(self, source_file="", output_file="automata", out_type="gif"):
         self.entrees: list[str] = []
         self.exits: list[str] = []
         self.transitions: dict[str, dict[str, list[str]]] = {}
         self.alphabet: list[str] = []
-        self.source = source_file
-        self.output = output_file
-        self.format = out_type
 
-        self.alt_trans = {}
+        self.source: str = source_file
+        self.output: str = output_file
+        self.format: str = out_type
 
         if source_file:
-            self.__populate_from_file__(self.source)
+            self._populate_from_file_(self.source)
 
     def __str__(self):
         headers = ["E/S", "État"] + self.alphabet
         table = [
             [
-                self.__give_state_behaviour__(k),
+                self._give_state_behaviour_(k),
                 k,
-            ] + [','.join(self.__fetch_transition__(k, x)) for x in self.alphabet]
+            ] + [','.join(self._fetch_transition_(k, x)) for x in self.alphabet]
             for k in self.transitions.keys()
         ]
 
@@ -50,24 +91,65 @@ class Automata:
             and self.entrees == other.entrees \
             and self.exits == other.exists
 
-    def __give_state_behaviour__(self, state: str, arrows=True):
-        res = ""
+    def _give_state_behaviour_(self, state: str, arrows: bool = True) -> str:
+        """
+        Indicates whether a state is terminal, initial or both
 
+        Parameters
+        -------
+        state
+            The state to analyse
+        arrows
+            The fancy notation or with letters
+
+        Returns
+        -------
+        str
+            An indication of initial or/and terminal behaviour of the state
+        """
         if state in self.entrees and state in self.exits:
-            res = '<-->' if arrows else 'E S'
+            return '<-->' if arrows else 'E S'
 
-        elif state in self.entrees:
-            res += '-->' if arrows else 'E'
+        if state in self.entrees:
+            return '-->' if arrows else 'E'
 
-        elif state in self.exits:
-            res += '<--' if arrows else 'S'
+        if state in self.exits:
+            return '<--' if arrows else 'S'
 
-        return res
+        return ''
 
-    def __fetch_transition__(self, state: str, trans: str):
-        return self.transitions.get(state).get(trans) or []
+    def _fetch_transition_(self, state: str, letter: str) -> list[str]:
+        """
+        Gets the list of states the `state` is going to with the letter `letter`
 
-    def __populate_from_file__(self, path: str):
+        Parameters
+        -------
+        state
+            The state to get
+        letter
+            the letter
+
+        Returns
+        -------
+        list[str]
+            the list of states in the transition dict
+        """
+        return self.transitions.get(state).get(letter) or []
+
+    def _populate_from_file_(self, path: str) -> object:
+        """
+        Fills the transition dict with a .txt file
+
+        Parameters
+        -------
+        path
+            the path of the .txt file
+
+        Returns
+        -------
+        object
+            self
+        """
         with open(path, 'r') as f:
             fa_data = f.readlines()
 
@@ -87,7 +169,7 @@ class Automata:
                     state += val
 
                 if self.transitions.get(state):
-                    if self.transitions.get(state).get(line[pos]):
+                    if self._fetch_transition_(state, line[pos]):
                         self.transitions[state][line[pos]].append(line[pos + 1:])
                         self.transitions[state][line[pos]].sort()
                     else:
@@ -95,23 +177,36 @@ class Automata:
                 else:
                     self.transitions[state] = {line[pos]: [line[pos + 1:]]}
 
-        if self.entrees:
-            for i in self.entrees:
-                if not self.transitions.get(i):
-                    self.transitions[i] = {}
-                    for letter in self.alphabet:
-                        self.transitions[i][letter] = []
+        # if I modify self.transitions directly it changes the size of the iter and breaks
+        # it is equivalent ot a temp variable
+        i_dont_want_to_break_things: dict[str, dict[str, list[str]]] = {}
 
-        if self.exits:
-            for i in self.exits:
-                if not self.transitions.get(i):
-                    self.transitions[i] = {}
-                    for letter in self.alphabet:
-                        self.transitions[i][letter] = []
+        for state, transitions in self.transitions.items():
+            for letter, states in transitions.items():
+                for i in states:
+                    if i not in self.transitions.keys():
+                        i_dont_want_to_break_things[i] = {letter: [] for letter in self.alphabet}
+
+        self.transitions |= i_dont_want_to_break_things
 
         return self.transitions
 
-    def __different_transitions_dict__(self):
+    def _different_transitions_dict_(self) -> dict[str, dict[str, list]]:
+        """
+        Creates a different organization for the transition dict
+
+        Returns
+        -------
+        dict
+            {
+                'state1' : {
+                    'state1' : [ 'letter1' ],
+                    'state2' : [ 'letter1' ],
+                    'state3' : [ 'letter2' ],
+                },
+                ...
+            }
+        """
         dic = {}
         for state, transitions in self.transitions.items():
             dic[state] = {}
@@ -123,7 +218,19 @@ class Automata:
                         dic[state][i] = [k]
         return dic
 
-    def is_e_nfa(self):
+    def _state_is_empty_(self, state: str, letter: str) -> bool:
+        return not self._fetch_transition_(state, letter) \
+            or self._fetch_transition_(state, letter) == ['']
+
+    def is_e_nfa(self) -> bool:
+        """
+        Gives whether the automata hase epsilon transitions
+
+        Returns
+        -------
+        bool
+            has epsilon transition
+        """
         for state, transitions in self.transitions.items():
             for trans in transitions:
                 if 'E' in trans or 'ε' in trans:
@@ -131,7 +238,15 @@ class Automata:
 
         return False
 
-    def to_dot_format(self):
+    def to_dot_format(self) -> str:
+        """
+        Transforms the transition dict to a string in the dot format
+
+        Returns
+        -------
+        object
+            self
+        """
         to_dot = "digraph finite_state_machine { rankdir=LR\n"
 
         to_dot += "\tnode [shape=doublecircle]\n"
@@ -146,14 +261,14 @@ class Automata:
 
         to_dot += '\n'
 
-        for state, transitions in self.__different_transitions_dict__().items():
+        for state, transitions in self._different_transitions_dict_().items():
             for k, v in transitions.items():
                 to_dot += f"\t{state.replace('-', '.')} -> {k.replace('-', '.')} [label=\"{str(', '.join(v))}\"] \n"
 
         to_dot += "}"
         return to_dot
 
-    def is_standard(self):
+    def is_standard(self) -> bool:
         if len(self.entrees) != 1:
             return False
 
@@ -164,7 +279,7 @@ class Automata:
 
         return True
 
-    def get_standard(self):
+    def get_standard(self) -> object:
         if self.is_standard():
             return self
 
@@ -183,49 +298,55 @@ class Automata:
 
         return standard
 
-    def is_complete(self):
+    def is_complete(self) -> bool:
         for state in self.transitions.keys():
             for letter in self.alphabet:
-                if not self.__fetch_transition__(state, letter):
+                if self._state_is_empty_(state, letter):
                     return False
         return True
 
-    def get_complete(self):
+    def get_complete(self) -> object:
         if self.is_complete():
             return self
 
         complete = deepcopy(self)
-        garbage = {'a': ['P'],
-                   'b': ['P']}
+        garbage = {letter: ['P'] for letter in self.alphabet}
 
         complete.transitions['P'] = garbage
 
         for state in self.transitions.keys():
             for letter in self.alphabet:
-                if not self.__fetch_transition__(state, letter):
+                if self._state_is_empty_(state, letter):
                     complete.transitions[state][letter] = ['P']
 
         return complete
 
-    def is_determinate(self):
+    def is_determinate(self) -> bool:
         if len(self.entrees) != 1:
             return False
 
         for transition in self.transitions.values():
-            for label, states in transition.items():
+            for states in transition.values():
                 if len(states) > 1:
                     return False
 
         return True
 
-    def get_determinized(self):
+    def get_determinized(self, step: bool = False) -> object | list[object]:
         if self.is_e_nfa():
             return "non"
+
         if self.is_determinate():
-            if self.get_complete():
+            if self.is_complete():
+                if step:
+                    return [self]
                 return self
             else:
+                if step:
+                    return [self.get_complete()]
                 return self.get_complete()
+
+        steps: list[Automata] = []
 
         determinate = Automata()
         determinate.alphabet = self.alphabet.copy()
@@ -235,9 +356,9 @@ class Automata:
         for state in self.entrees:
             for letter in self.transitions.get(state):
                 if new_entree.get(letter):
-                    new_entree[letter] += self.transitions.get(state).get(letter).copy()
+                    new_entree[letter] += self._fetch_transition_(state, letter).copy()
                 else:
-                    new_entree[letter] = self.transitions.get(state).get(letter).copy()
+                    new_entree[letter] = self._fetch_transition_(state, letter).copy()
 
                 new_entree[letter] = sorted(list(set(new_entree[letter])))
 
@@ -257,6 +378,9 @@ class Automata:
                 determinate.exits.append('-'.join(self.entrees))
 
         determinate.transitions = deepcopy(new_entree)
+
+        if step:
+            steps.append(deepcopy(determinate))
 
         state_buffer = []
         for composing_states in new_entree.values():
@@ -304,9 +428,14 @@ class Automata:
                 to_state = sorted(list(set(to_state)))
                 det_tr.get(cur_state)[letter] = ['-'.join(to_state)]
 
+            if step:
+                steps.append(deepcopy(determinate))
+
+        if step:
+            return steps + [determinate.get_complete()]
         return determinate.get_complete()
 
-    def test_word(self, word):
+    def test_word(self, word) -> bool:
         if False in [letter in self.alphabet + ['E', 'ε'] for letter in word]:
             return False
 
@@ -316,14 +445,14 @@ class Automata:
         cur_state = self.entrees[0]
 
         for i, letter in enumerate(word):
-            next_state = self.__fetch_transition__(cur_state, letter)
+            next_state = self._fetch_transition_(cur_state, letter)
 
             cur_state = next_state
 
-    def is_miniminized(self):
-        pass
+    def is_miniminized(self) -> bool:
+        ...
         # TODO
 
-    def miniminize(self):
-        return self
+    def miniminize(self) -> object:
+        ...
         # TODO

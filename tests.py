@@ -6,12 +6,11 @@ for i in range(1):
     t = Automata(source_file=current_automata, output_file=f"B4-{i}")
     print(i)
     print(t)
-    print("détérminé")
-    print(t.get_determinized())
-    repr(t.get_determinized())
+    print("détérminé :")
+
     print("--------------------------------")
 
-    # AutomataAnimation.standardize_animation(t)
+    AutomataAnimation.determinize_animation(t)
     # print(f"{i} :")
     # print(repr(t))
 
