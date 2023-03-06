@@ -435,7 +435,6 @@ class Automata:
         if step:
             return steps + [determinate.get_complete()]
 
-        print(determinate.transitions)
         return determinate.get_complete()
 
     def test_word(self, word) -> bool:
