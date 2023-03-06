@@ -27,11 +27,11 @@ def info():
 
 
 def std():
-    repr(t.standardize())
+    repr(t.get_standard())
 
 
 def dtm():
-    repr(t.determinize())
+    repr(t.get_determinized())
 
 
 def mini():

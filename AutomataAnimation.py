@@ -35,7 +35,7 @@ class AutomataAnimation:
         graphviz.Source(automata.to_dot_format()) \
             .render(outfile=f'{file_names[0]}', format='png', view=False)
 
-        graphviz.Source(automata.standardize().to_dot_format()) \
+        graphviz.Source(automata.get_standard().to_dot_format()) \
             .render(outfile=f'{file_names[1]}', format='png', view=False)
 
         images = [Image.open(fn) for fn in file_names]

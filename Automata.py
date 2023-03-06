@@ -36,7 +36,9 @@ class Automata:
         try:
             os.mkdir("out")
             os.mkdir("dot")
-        except:
+        except OSError:
+            pass
+        else:
             pass
 
         graphviz.Source(self.to_dot_format()) \
@@ -48,14 +50,17 @@ class Automata:
             and self.entrees == other.entrees \
             and self.exits == other.exists
 
-    def __give_state_behaviour__(self, state: str):
+    def __give_state_behaviour__(self, state: str, arrows=True):
         res = ""
 
-        if state in self.entrees:
-            res += "E "
+        if state in self.entrees and state in self.exits:
+            res = '<-->' if arrows else 'E S'
 
-        if state in self.exits:
-            res += "S"
+        elif state in self.entrees:
+            res += '-->' if arrows else 'E'
+
+        elif state in self.exits:
+            res += '<--' if arrows else 'S'
 
         return res
 
@@ -90,15 +95,19 @@ class Automata:
                 else:
                     self.transitions[state] = {line[pos]: [line[pos + 1:]]}
 
-        if not len(self.transitions):
-            if len(self.entrees):
-                for i in self.entrees:
+        if self.entrees:
+            for i in self.entrees:
+                if not self.transitions.get(i):
                     self.transitions[i] = {}
+                    for letter in self.alphabet:
+                        self.transitions[i][letter] = []
 
-        if not len(self.transitions):
-            if len(self.exits):
-                for i in self.exits:
+        if self.exits:
+            for i in self.exits:
+                if not self.transitions.get(i):
                     self.transitions[i] = {}
+                    for letter in self.alphabet:
+                        self.transitions[i][letter] = []
 
         return self.transitions
 
@@ -117,7 +126,7 @@ class Automata:
     def is_e_nfa(self):
         for state, transitions in self.transitions.items():
             for trans in transitions:
-                if 'E' or 'ε' in trans:
+                if 'E' in trans or 'ε' in trans:
                     return True
 
         return False
@@ -127,19 +136,19 @@ class Automata:
 
         to_dot += "\tnode [shape=doublecircle]\n"
         for exit_ in self.exits:
-            to_dot += f"\t{''.join(exit_.split('-'))}\n"
+            to_dot += f"\t{exit_.replace('-', '.')}\n"
 
         to_dot += '\n'
 
         to_dot += "\tnode [shape=circle]\n"
         for idx, entree in enumerate(self.entrees):
-            to_dot += f"\tfake{str(idx)} [style=invisible]\n\tfake{str(idx)} -> {''.join(entree.split('-'))}\n"
+            to_dot += f"\tfake{str(idx)} [style=invisible]\n\tfake{str(idx)} -> {entree.replace('-', '.')}\n"
 
         to_dot += '\n'
 
         for state, transitions in self.__different_transitions_dict__().items():
             for k, v in transitions.items():
-                to_dot += f"\t{''.join(state.split('-'))} -> {''.join(k.split('-'))} [label=\"{str(', '.join(v))}\"] \n"
+                to_dot += f"\t{state.replace('-', '.')} -> {k.replace('-', '.')} [label=\"{str(', '.join(v))}\"] \n"
 
         to_dot += "}"
         return to_dot
@@ -155,7 +164,7 @@ class Automata:
 
         return True
 
-    def standardize(self):
+    def get_standard(self):
         if self.is_standard():
             return self
 
@@ -181,7 +190,7 @@ class Automata:
                     return False
         return True
 
-    def complete(self):
+    def get_complete(self):
         if self.is_complete():
             return self
 
@@ -209,29 +218,31 @@ class Automata:
 
         return True
 
-    def determinize(self, print_steps=False):
+    def get_determinized(self):
+        if self.is_e_nfa():
+            return "non"
         if self.is_determinate():
-            if self.complete():
+            if self.get_complete():
                 return self
             else:
-                return self.complete()
+                return self.get_complete()
 
         determinate = Automata()
         determinate.alphabet = self.alphabet.copy()
 
         # unite the entrees
         new_entree = {}
-        for i in self.entrees:
-            for k in self.transitions.get(i):
-                if new_entree.get(k):
-                    new_entree[k] += self.transitions.get(i).get(k).copy()
+        for state in self.entrees:
+            for letter in self.transitions.get(state):
+                if new_entree.get(letter):
+                    new_entree[letter] += self.transitions.get(state).get(letter).copy()
                 else:
-                    new_entree[k] = self.transitions.get(i).get(k).copy()
+                    new_entree[letter] = self.transitions.get(state).get(letter).copy()
 
-                new_entree[k] = sorted(list(set(new_entree[k])))
+                new_entree[letter] = sorted(list(set(new_entree[letter])))
 
-        for k, v in new_entree.items():
-            new_entree[k] = ['-'.join(v)]
+        for letter, to_state in new_entree.items():
+            new_entree[letter] = ['-'.join(to_state)]
 
         new_entree = {'-'.join(self.entrees): new_entree}
 
@@ -241,16 +252,16 @@ class Automata:
         determinate.entrees = list(new_entree.keys())
         determinate.exits = []
 
-        for i in self.entrees:
-            if i in self.exits:
+        for state in self.entrees:
+            if state in self.exits:
                 determinate.exits.append('-'.join(self.entrees))
 
         determinate.transitions = deepcopy(new_entree)
 
         state_buffer = []
-        for x in new_entree.values():
-            for y in x.values():
-                state_buffer += y
+        for composing_states in new_entree.values():
+            for joined_states in composing_states.values():
+                state_buffer += joined_states
 
         state_buffer = list(set(state_buffer))
 
@@ -262,36 +273,38 @@ class Automata:
             det_tr[cur_state] = {}
 
             if self.transitions.get(cur_state):
-                for k, v in self.transitions.get(cur_state).items():
-                    det_tr[cur_state][k] = ['-'.join(v)]
+                for letter, to_state in self.transitions.get(cur_state).items():
+                    det_tr[cur_state][letter] = ['-'.join(to_state)]
 
                 if cur_state in self.exits:
                     determinate.exits.append(cur_state)
 
             elif not det_tr.get(cur_state):
-                states = list(set(cur_state.split('-')))
+                composing_states = list(set(cur_state.split('-')))
+
+                for receiving_state in composing_states:
+                    if receiving_state in self.exits:
+                        determinate.exits.append(cur_state)
 
                 for letter in determinate.alphabet:
                     det_tr.get(cur_state)[letter] = []
 
-                for i in states:
-                    for k, v in self.transitions.get(i).items():
-                        temp = det_tr.get(cur_state)[k]
-                        temp += v
-                        det_tr.get(cur_state)[k] = list(set(temp))
-                        for j in det_tr.get(cur_state)[k]:
-                            if j in self.exits:
-                                determinate.exits.append(cur_state)
+                for state in composing_states:
+                    for letter, to_state in self.transitions.get(state).items():
+                        temp = det_tr.get(cur_state).get(letter)
+                        temp += to_state
+                        det_tr.get(cur_state)[letter] = list(set(temp))
 
-            for x in det_tr.get(cur_state).values():
-                y = '-'.join(x)
-                if y and (y not in det_tr.keys()) and y not in state_buffer:
-                    state_buffer.append(y)
+            for composing_states in det_tr.get(cur_state).values():
+                joined_states = '-'.join(sorted(composing_states))
+                if joined_states and (joined_states not in det_tr.keys()) and joined_states not in state_buffer:
+                    state_buffer.append(joined_states)
 
-            for k, v in det_tr.get(cur_state).items():
-                det_tr.get(cur_state)[k] = ['-'.join(v)]
+            for letter, to_state in det_tr.get(cur_state).items():
+                to_state = sorted(list(set(to_state)))
+                det_tr.get(cur_state)[letter] = ['-'.join(to_state)]
 
-        return determinate
+        return determinate.get_complete()
 
     def test_word(self, word):
         if False in [letter in self.alphabet + ['E', 'ε'] for letter in word]:
