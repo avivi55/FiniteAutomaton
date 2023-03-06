@@ -68,8 +68,7 @@ class Automata:
                 self._give_state_behaviour_(k),
                 k,
             ] + [','.join(self._fetch_transition_(k, x)) for x in self.alphabet]
-            for k in self.transitions.keys()
-        ]
+            for k in self.transitions.keys()]
 
         return tabulate.tabulate(table, headers, tablefmt="rounded_grid")
 
@@ -244,26 +243,27 @@ class Automata:
 
         Returns
         -------
-        object
-            self
+        str
+            the dot file
         """
         to_dot = "digraph finite_state_machine { rankdir=LR\n"
 
         to_dot += "\tnode [shape=doublecircle]\n"
         for exit_ in self.exits:
-            to_dot += f"\t{exit_.replace('-', '.')}\n"
+            to_dot += f"\t\"{exit_}\"\n"
 
         to_dot += '\n'
 
         to_dot += "\tnode [shape=circle]\n"
         for idx, entree in enumerate(self.entrees):
-            to_dot += f"\tfake{str(idx)} [style=invisible]\n\tfake{str(idx)} -> {entree.replace('-', '.')}\n"
+            to_dot += f"\tfake{str(idx)} [style=invisible]\n\tfake{str(idx)} -> \"{entree}\"\n"
 
         to_dot += '\n'
 
         for state, transitions in self._different_transitions_dict_().items():
             for k, v in transitions.items():
-                to_dot += f"\t{state.replace('-', '.')} -> {k.replace('-', '.')} [label=\"{str(', '.join(v))}\"] \n"
+                if k:
+                    to_dot += f"\t\"{state}\" -> \"{k}\" [label=\"{str(', '.join(v))}\"] \n"
 
         to_dot += "}"
         return to_dot
@@ -334,7 +334,7 @@ class Automata:
 
     def get_determinized(self, step: bool = False) -> object | list[object]:
         if self.is_e_nfa():
-            return "non"
+            return self
 
         if self.is_determinate():
             if self.is_complete():
@@ -346,7 +346,7 @@ class Automata:
                     return [self.get_complete()]
                 return self.get_complete()
 
-        steps: list[Automata] = []
+        steps: list[Automata | object] = []
 
         determinate = Automata()
         determinate.alphabet = self.alphabet.copy()
@@ -397,6 +397,7 @@ class Automata:
             det_tr[cur_state] = {}
 
             if self.transitions.get(cur_state):
+                letter: str
                 for letter, to_state in self.transitions.get(cur_state).items():
                     det_tr[cur_state][letter] = ['-'.join(to_state)]
 
@@ -433,6 +434,8 @@ class Automata:
 
         if step:
             return steps + [determinate.get_complete()]
+
+        print(determinate.transitions)
         return determinate.get_complete()
 
     def test_word(self, word) -> bool:

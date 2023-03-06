@@ -60,12 +60,7 @@ class AutomataAnimation:
         except FileExistsError:
             ...
 
-        try:
-            os.mkdir(f"anim/{automata.output}")
-        except FileExistsError:
-            ...
-
-        steps = automata.get_determinized(step=True)
+        steps: list[object | Automata] = automata.get_determinized(step=True)
         steps = [automata] + steps
 
         file = f'anim/{automata.output}/{automata.output}'
