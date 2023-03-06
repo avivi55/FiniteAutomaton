@@ -4,7 +4,49 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="determinize finished and working">
+    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="determinized fixed + animation">
+      <change afterPath="$PROJECT_DIR$/a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-0/determinize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-10/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-11/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-12/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-13/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-14/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-15/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-16/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-17/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-18/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-19/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-20/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-21/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-22/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-23/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-24/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-25/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-26/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-27/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-28/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-29/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-3/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-30/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-35/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-36/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-37/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-38/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-39/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-4/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-40/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-41/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-42/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-43/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-5/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-6/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-7/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-8/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/anim/B4-9/strandardize.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/n" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Automata.py" beforeDir="false" afterPath="$PROJECT_DIR$/Automata.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AutomataAnimation.py" beforeDir="false" afterPath="$PROJECT_DIR$/AutomataAnimation.py" afterDir="false" />
@@ -150,7 +192,7 @@
       <workItem from="1677835796168" duration="5886000" />
       <workItem from="1677948065030" duration="622000" />
       <workItem from="1678031935119" duration="12342000" />
-      <workItem from="1678090437940" duration="17389000" />
+      <workItem from="1678090437940" duration="18312000" />
     </task>
     <task id="LOCAL-00001" summary="added main loop, better formating">
       <created>1677231392963</created>
@@ -222,7 +264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678038493293</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="determinized fixed + animation">
+      <created>1678126362024</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1678126362024</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,7 +296,8 @@
     <MESSAGE value="additional changes, `self.transition` changed and printing fixed" />
     <MESSAGE value="still broken, but better" />
     <MESSAGE value="determinize finished and working" />
-    <option name="LAST_COMMIT_MESSAGE" value="determinize finished and working" />
+    <MESSAGE value="determinized fixed + animation" />
+    <option name="LAST_COMMIT_MESSAGE" value="determinized fixed + animation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -262,6 +312,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/L2FiniteAutomaton$main.coverage" NAME="main Coverage Results" MODIFIED="1677240362043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$tests.coverage" NAME="tests Coverage Results" MODIFIED="1678125375340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$tests.coverage" NAME="tests Coverage Results" MODIFIED="1678125588691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
