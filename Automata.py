@@ -437,6 +437,8 @@ class Automata:
 
         return determinate.get_complete()
 
+    # BONUS #
+
     def test_word(self, word) -> bool:
         if False in [letter in self.alphabet + ['E', 'ε'] for letter in word]:
             return False
@@ -451,10 +453,21 @@ class Automata:
 
             cur_state = next_state
 
-    def is_miniminized(self) -> bool:
+    def is_minimized(self) -> bool:
         ...
         # TODO
 
-    def miniminize(self) -> object:
+    def minimize(self) -> object:
         ...
         # TODO
+
+    def get_complementary(self):
+        if not self.is_determinate and not self.is_complete():
+            raise TypeError("L'automate n'est pas deterministe ou complet!!!")
+
+        complementary = deepcopy(self)
+
+        complementary.exits = self.entrees.copy()
+        complementary.entrees = self.exits.copy()
+
+        return complementary
