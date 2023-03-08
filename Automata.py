@@ -90,6 +90,9 @@ class Automata:
             and self.entrees == other.entrees \
             and self.exits == other.exists
 
+    def __len__(self):
+        return len(self.transitions.keys())
+
     def _give_state_behaviour_(self, state: str, arrows: bool = True) -> str:
         """
         Indicates whether a state is terminal, initial or both
@@ -180,6 +183,14 @@ class Automata:
         # it is equivalent ot a temp variable
         i_dont_want_to_break_things: dict[str, dict[str, list[str]]] = {}
 
+        for i in self.entrees:
+            if i not in self.transitions.keys():
+                i_dont_want_to_break_things[i] = {letter: [] for letter in self.alphabet}
+
+        for i in self.exits:
+            if i not in self.transitions.keys():
+                i_dont_want_to_break_things[i] = {letter: [] for letter in self.alphabet}
+
         for state, transitions in self.transitions.items():
             for letter, states in transitions.items():
                 for i in states:
@@ -220,6 +231,15 @@ class Automata:
     def _state_is_empty_(self, state: str, letter: str) -> bool:
         return not self._fetch_transition_(state, letter) \
             or self._fetch_transition_(state, letter) == ['']
+
+    def get_info(self):
+        headers = ["Standard", "Détérminé", "Complet", "Nombre de transition"]
+        table =[['', str(self.is_standard()),
+                 str(self.is_determinate()),
+                 str(self.is_complete()),
+                 str(len(self))]]
+
+        return tabulate.tabulate(table, headers, tablefmt="rounded_grid")
 
     def is_e_nfa(self) -> bool:
         """

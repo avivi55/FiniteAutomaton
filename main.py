@@ -1,3 +1,3 @@
 import Application
 
-Application.Application()
+Application.run()
