@@ -16,6 +16,28 @@ def erase_warning(window, warning, x, y):
     window.refresh()
 
 
+def get_guide(guide, width):
+    guide_s = []
+
+    for category, keybinds in guide.items():
+        keybindings = ""
+        for key, binding in keybinds.items():
+            keybindings += f"{key} : {binding} | "
+        keybindings = keybindings[:-2]
+
+        line = f"{keybindings:^{width - 1}}"
+
+        for i, letter in enumerate(category):
+            line = line[0:i] + letter + line[i + 1:]
+
+        if len(line) != width - 1:
+            line += ' '
+
+        guide_s.append(line)
+
+    return guide_s
+
+
 def info_page(window, A: B4_Automata.Automata, func, name):
     window.clear()
     height, width = window.getmaxyx()
@@ -51,6 +73,62 @@ def info_page(window, A: B4_Automata.Automata, func, name):
     return True
 
 
+def word_test_page(window, automata: B4_Automata.Automata, n_automata):
+    window.clear()
+
+    height, width = window.getmaxyx()
+    automata = automata.get_determinized()
+    automata_lst = str(automata).split('\n')
+    start_y = get_middle(len(automata_lst) * ' ', height)
+
+    prompt = "Entrez un mot de test : "
+    window.addstr(start_y - 2, get_middle(prompt, width), prompt)
+
+    win_x = get_middle(20 * " ", width)
+    win = curses.newwin(1, 20, start_y + 1, win_x)
+    box = Textbox(win)
+    rectangle(window, start_y, win_x - 1, start_y + 2, win_x + 20)
+
+    guide = {
+        " ": {"": ""},
+        "": {"M": "Menu de l'automate"},
+        "  ": {"": ""},
+    }
+
+    guide_s = get_guide(guide, width)
+
+    while True:
+        for i, line in enumerate(automata_lst):
+            window.addstr(start_y + 10 + i, get_middle(line, width), line)
+
+        for i, line in enumerate(guide_s):
+            window.addstr((height - len(guide_s)) + i, 0, line, curses.color_pair(3))
+
+        window.addstr(start_y - 7, get_middle(f"Automate n°{n_automata}", width), f"Automate n°{n_automata}", curses.A_UNDERLINE)
+
+        warning = "L'automate à été automatiquement déterminisé pour faire le test de mot"
+        window.addstr(start_y - 5, get_middle(warning, width), warning, curses.A_BOLD)
+
+        window.refresh()
+        box.edit()
+        word = box.gather().strip()
+        answer = str(automata.test_word(word.strip()))
+
+        window.addstr(start_y + 5, get_middle(f"Mot : '{word}'", width), f"Mot : '{word}'")
+
+        window.addstr(start_y + 7, 0, width * ' ')
+        window.addstr(start_y + 7, get_middle(answer, width), answer)
+
+        window.move(0, 0)
+
+        window.refresh()
+        k = window.getch()
+        if chr(k) == 'm' or chr(k) == 'M':
+            return False
+        else:
+            continue
+
+
 def automata_page(window, n_automata):
     height, width = window.getmaxyx()
     automata = B4_Automata.Automata(source_file=f"automaton/B4-{n_automata}.txt")
@@ -77,6 +155,7 @@ def automata_page(window, n_automata):
             "S": "Standardiser",
             "D": "Détérminiser",
             "P": "Complémentaire",
+            "W": "Test de mots"
         },
         "Rendu graphique simple :": {
             "F1": "Automtate de base",
@@ -90,24 +169,7 @@ def automata_page(window, n_automata):
         }
     }
 
-    guide_s = []
-
-    for category, keybinds in guide.items():
-        keybindings = ""
-        for key, binding in keybinds.items():
-            keybindings += f"{key} : {binding} | "
-        keybindings = keybindings[:-2]
-
-        line = f"{keybindings:^{width - 1}}"
-
-        for i, letter in enumerate(category):
-            line = line[0:i] + letter + line[i+1:]
-
-        if len(line) != width-1:
-            line += ' '
-
-        guide_s.append(line)
-
+    guide_s = get_guide(guide, width)
     while True:
         height, width = window.getmaxyx()
 
@@ -136,7 +198,10 @@ def automata_page(window, n_automata):
             case 'c' | 'C':
                 no_change = info_page(window, automata, lambda x: x.get_complete(), "Complet")
             case 'p' | 'P':
-                no_change = info_page(window, automata, lambda x: x.get_complementary(), "Automate reconaissant le langage complémentaire")
+                no_change = info_page(window, automata, lambda x: x.get_complementary(),
+                                      "Automate langage complémentaire de l'automate déterminisé")
+            case 'w' | 'W':
+                no_change = word_test_page(window, automata, n_automata)
             case _:
                 match k:
                     case f._1:
@@ -185,7 +250,7 @@ def main_page(window):
     win_x = get_middle(4 * " ", width)
     win = curses.newwin(1, 3, start_y + 7, win_x)
     box = Textbox(win)
-    rectangle(window, start_y + 6, win_x - 1, start_y + 8, win_x + 4, )
+    rectangle(window, start_y + 6, win_x - 1, start_y + 8, win_x + 4)
 
     window.refresh()
 

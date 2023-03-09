@@ -5,8 +5,8 @@ for i in range(5,6):
     current_automata = f"automaton/B4-{i}.txt"
     t = Automata(source_file=current_automata, output_file=f"B4-{i}")
     print(i)
-    print(t)
-    print(t.get_complementary())
+    print(t.get_determinized())
+    print(t.get_determinized().test_word('abba'))
     print("--------------------------------")
 
     # AutomataAnimation.determinize_animation(t, view=True)

@@ -328,7 +328,7 @@ class Automata:
                     dic[k] = v
                 dic[k] = list(set(dic[k]))
 
-        standard.transitions["I"] = dic
+        standard.transitions['I'] = dic
         standard.entrees = ['I']
 
         return standard
@@ -484,9 +484,15 @@ class Automata:
         cur_state = self.entrees[0]
 
         for i, letter in enumerate(word):
-            next_state = self._fetch_transition_(cur_state, letter)
+            # print(cur_state)
+            next_state = self._fetch_transition_(cur_state, letter)[0]
 
             cur_state = next_state
+
+        if cur_state in self.exits:
+            return True
+
+        return False
 
     def is_minimized(self) -> bool:
         ...
@@ -497,14 +503,13 @@ class Automata:
         # TODO
 
     def get_complementary(self):
-        if not self.is_determinate and not self.is_complete():
-            raise TypeError("L'automate n'est pas deterministe ou complet!!!")
-
-        complementary = deepcopy(self)
+        if not self.is_determinate():
+            complementary = deepcopy(self.get_determinized())
+        else:
+            complementary = deepcopy(self)
 
         non_exits = [state for state in self.transitions.keys() if state not in self.exits]
 
         complementary.exits = non_exits.copy()
-        # complementary.entrees = self.exits.copy()
 
         return complementary
