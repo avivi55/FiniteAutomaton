@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="starting curses application">
+    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="Probably finished app">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Automata.py" beforeDir="false" afterPath="$PROJECT_DIR$/Automata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-1/determinize.gif" beforeDir="false" afterPath="$PROJECT_DIR$/anim/B4-1/determinize.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_Application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automata.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_Automata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutomataAnimation.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_AutomataAnimation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/anim/B4-0/determinize.gif" beforeDir="false" afterPath="$PROJECT_DIR$/anim/B4-0/determinize.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/automata.dot" beforeDir="false" afterPath="$PROJECT_DIR$/dot/automata.dot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/automata.gif" beforeDir="false" afterPath="$PROJECT_DIR$/out/automata.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +75,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.tests">
-    <configuration name="Application" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="B4_Application" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="L2FiniteAutomaton" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -85,7 +88,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Application.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/B4_Application.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -94,7 +97,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+    <configuration name="B4_main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="L2FiniteAutomaton" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -108,7 +111,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/B4_main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -141,13 +144,13 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.B4_main" />
       <item itemvalue="Python.tests" />
-      <item itemvalue="Python.main" />
-      <item itemvalue="Python.Application" />
+      <item itemvalue="Python.B4_Application" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Application" />
+        <item itemvalue="Python.B4_Application" />
       </list>
     </recent_temporary>
   </component>
@@ -176,7 +179,8 @@
       <workItem from="1678179975870" duration="5304000" />
       <workItem from="1678195125107" duration="6080000" />
       <workItem from="1678212187239" duration="2444000" />
-      <workItem from="1678265115200" duration="9654000" />
+      <workItem from="1678265115200" duration="11886000" />
+      <workItem from="1678308870966" duration="23975000" />
     </task>
     <task id="LOCAL-00001" summary="added main loop, better formating">
       <created>1677231392963</created>
@@ -283,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678222921976</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Probably finished app">
+      <created>1678286888880</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1678286888880</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,7 +324,8 @@
     <MESSAGE value="fixed dot formatting bug" />
     <MESSAGE value="fixed dot formatting bug 2" />
     <MESSAGE value="starting curses application" />
-    <option name="LAST_COMMIT_MESSAGE" value="starting curses application" />
+    <MESSAGE value="Probably finished app" />
+    <option name="LAST_COMMIT_MESSAGE" value="Probably finished app" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -329,6 +341,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/L2FiniteAutomaton$main.coverage" NAME="main Coverage Results" MODIFIED="1678197259341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/L2FiniteAutomaton$Application.coverage" NAME="Application Coverage Results" MODIFIED="1678282580636" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$tests.coverage" NAME="tests Coverage Results" MODIFIED="1678282766126" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$tests.coverage" NAME="tests Coverage Results" MODIFIED="1678380684835" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

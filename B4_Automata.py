@@ -3,6 +3,15 @@ import tabulate
 import string
 import os
 from copy import deepcopy
+import sys
+import subprocess
+
+
+def open_image(path):
+    command = {'linux': 'xdg-open',
+               'win32': 'explorer',
+               'darwin': 'open'}[sys.platform]
+    subprocess.Popen([command, path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 class Automata:
@@ -82,8 +91,11 @@ class Automata:
             pass
 
         graphviz.Source(self.to_dot_format()) \
-            .render(filename=f'dot/{self.output}.dot', outfile=f'out/{self.output}.{self.format}', view=True)
-        return str(self)
+            .render(filename=f'dot/{self.output}.dot', outfile=f'out/{self.output}.{self.format}', view=False)
+
+        open_image(f'out/{self.output}.{self.format}')
+
+        return ''
 
     def __eq__(self, other):
         return self.transitions == other.transitions \
@@ -233,11 +245,14 @@ class Automata:
             or self._fetch_transition_(state, letter) == ['']
 
     def get_info(self):
-        headers = ["Standard", "Détérminé", "Complet", "Nombre de transition"]
-        table =[['', str(self.is_standard()),
-                 str(self.is_determinate()),
-                 str(self.is_complete()),
-                 str(len(self))]]
+        headers = ["Standard", "Détérminé", "Complet", "transitions", "n°entrée", "n°sortie"]
+        table = [[str(self.is_standard()),
+                  str(self.is_determinate()),
+                  str(self.is_complete()),
+                  str(len(self)),
+                  str(len(self.entrees)),
+                  str(len(self.exits))
+                  ]]
 
         return tabulate.tabulate(table, headers, tablefmt="rounded_grid")
 
@@ -487,7 +502,9 @@ class Automata:
 
         complementary = deepcopy(self)
 
-        complementary.exits = self.entrees.copy()
-        complementary.entrees = self.exits.copy()
+        non_exits = [state for state in self.transitions.keys() if state not in self.exits]
+
+        complementary.exits = non_exits.copy()
+        # complementary.entrees = self.exits.copy()
 
         return complementary

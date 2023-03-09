@@ -1,4 +1,4 @@
-from Automata import Automata
+from B4_Automata import Automata, open_image
 import graphviz
 import os
 from PIL import Image
@@ -25,7 +25,7 @@ class AutomataAnimation:
         ...
 
     @staticmethod
-    def standardize_animation(automata: Automata):
+    def standardize_animation(automata: Automata, view: bool = False):
         try:
             os.mkdir(f"anim/{automata.output}")
         except FileExistsError:
@@ -49,12 +49,17 @@ class AutomataAnimation:
         images[0].save(f"anim/{automata.output}/strandardize.gif",
                        save_all=True, append_images=images[1:], optimize=False, duration=2000, loop=0)
 
+        if view:
+            open_image(f"anim/{automata.output}/strandardize.gif")
+
         for f in file_names:
             os.remove(f)
             os.remove(f'{f[:-4]}.gv')
 
+        return ''
+
     @staticmethod
-    def determinize_animation(automata: Automata, duration: int = 1):
+    def determinize_animation(automata: Automata, duration: int = 2, view=False):
         try:
             os.mkdir(f"anim/{automata.output}")
         except FileExistsError:
@@ -76,8 +81,13 @@ class AutomataAnimation:
         images = [scale(img, m) for img in images]
 
         images[0].save(f"anim/{automata.output}/determinize.gif",
-                       save_all=True, append_images=images[1:], optimize=False, duration=duration*1000, loop=0)
+                       save_all=True, append_images=images[1:], optimize=False, duration=duration * 1000, loop=0)
+
+        if view:
+            open_image(f"anim/{automata.output}/determinize.gif")
 
         for f in file_names:
             os.remove(f)
             os.remove(f'{f[:-4]}.gv')
+
+        return ''

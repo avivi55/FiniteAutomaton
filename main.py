@@ -1,3 +1,0 @@
-import Application
-
-Application.run()
