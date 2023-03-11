@@ -499,26 +499,6 @@ class Automata:
 
         return False
 
-    def get_minimized(self) -> Automata:
-        minimized = Automata()
-        minimized.transitions['0'] = {letter: ['0'] for letter in self.alphabet}
-        minimized.entrees = ['0']
-        if not len(self.exits):
-            return minimized
-        elif len(self.entrees) == len(self.transitions.keys()):
-            minimized.exits = ['0']
-            return minimized
-
-        if not self.is_determinate():
-            automata = deepcopy((self.get_determinized()))
-        else:
-            automata = deepcopy(self)
-
-        non_final_states = [s for s in self.transitions.keys() if s not in self.exits]
-        final_states = self.exits.copy()
-
-        return automata
-
     def get_complementary(self):
         complementary = deepcopy(self.get_determinized())
 
