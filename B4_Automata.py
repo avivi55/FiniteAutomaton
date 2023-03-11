@@ -1,3 +1,6 @@
+from __future__ import annotations
+from typing import Dict, List
+
 import graphviz
 import tabulate
 import string
@@ -150,7 +153,7 @@ class Automata:
         """
         return self.transitions.get(state).get(letter) or []
 
-    def _populate_from_file_(self, path: str) -> object:
+    def _populate_from_file_(self, path: str) -> dict[str, dict[str, list[str]]]:
         """
         Fills the transition dict with a .txt file
 
@@ -161,7 +164,7 @@ class Automata:
 
         Returns
         -------
-        object
+        Automata
             self
         """
         with open(path, 'r') as f:
@@ -246,15 +249,17 @@ class Automata:
 
     def get_info(self):
         headers = ["Standard", "Détérminé", "Complet", "transitions", "n°entrée", "n°sortie"]
-        table = [[str(self.is_standard()),
+        table = [[
+                  str(self.is_standard()),
                   str(self.is_determinate()),
                   str(self.is_complete()),
                   str(len(self)),
                   str(len(self.entrees)),
                   str(len(self.exits))
-                  ]]
+                 ]]
 
-        return tabulate.tabulate(table, headers, tablefmt="rounded_grid")
+        return f"{tabulate.tabulate(table, headers, tablefmt='rounded_grid')}\n" \
+               f"{tabulate.tabulate([['{' + ', '.join(self.alphabet) + '}']], ['Alphabet'], tablefmt='rounded_grid')}"
 
     def is_e_nfa(self) -> bool:
         """
@@ -314,7 +319,7 @@ class Automata:
 
         return True
 
-    def get_standard(self) -> object:
+    def get_standard(self) -> Automata:
         if self.is_standard():
             return self
 
@@ -340,7 +345,7 @@ class Automata:
                     return False
         return True
 
-    def get_complete(self) -> object:
+    def get_complete(self) -> Automata:
         if self.is_complete():
             return self
 
@@ -367,7 +372,7 @@ class Automata:
 
         return True
 
-    def get_determinized(self, step: bool = False) -> object | list[object]:
+    def get_determinized(self, step: bool = False) -> Automata | list[Automata]:
         if self.is_e_nfa():
             return self
 
@@ -381,7 +386,7 @@ class Automata:
                     return [self.get_complete()]
                 return self.get_complete()
 
-        steps: list[Automata | object] = []
+        steps: list[Automata] = []
 
         determinate = Automata()
         determinate.alphabet = self.alphabet.copy()
@@ -494,21 +499,30 @@ class Automata:
 
         return False
 
-    def is_minimized(self) -> bool:
-        ...
-        # TODO
+    def get_minimized(self) -> Automata:
+        minimized = Automata()
+        minimized.transitions['0'] = {letter: ['0'] for letter in self.alphabet}
+        minimized.entrees = ['0']
+        if not len(self.exits):
+            return minimized
+        elif len(self.entrees) == len(self.transitions.keys()):
+            minimized.exits = ['0']
+            return minimized
 
-    def minimize(self) -> object:
-        ...
-        # TODO
+        if not self.is_determinate():
+            automata = deepcopy((self.get_determinized()))
+        else:
+            automata = deepcopy(self)
+
+        non_final_states = [s for s in self.transitions.keys() if s not in self.exits]
+        final_states = self.exits.copy()
+
+        return automata
 
     def get_complementary(self):
-        if not self.is_determinate():
-            complementary = deepcopy(self.get_determinized())
-        else:
-            complementary = deepcopy(self)
+        complementary = deepcopy(self.get_determinized())
 
-        non_exits = [state for state in self.transitions.keys() if state not in self.exits]
+        non_exits = [state for state in complementary.transitions.keys() if state not in complementary.exits]
 
         complementary.exits = non_exits.copy()
 

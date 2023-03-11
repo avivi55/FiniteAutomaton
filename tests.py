@@ -1,17 +1,23 @@
 from B4_Automata import Automata
 from B4_AutomataAnimation import AutomataAnimation
 
-for i in range(5,6):
+for i in range(6,7):
     current_automata = f"automaton/B4-{i}.txt"
     t = Automata(source_file=current_automata, output_file=f"B4-{i}")
     print(i)
+    print(t)
     print(t.get_determinized())
-    print(t.get_determinized().test_word('abba'))
+    print(t.get_determinized().to_dot_format())
+    print(t.get_complementary())
+    print(t.get_complementary().exits)
+    print(t.get_complementary().to_dot_format())
+    # print(t))
     print("--------------------------------")
 
     # AutomataAnimation.determinize_animation(t, view=True)
     # print(f"{i} :")
     # print(repr(t))
+
 
 
 # import sys,os

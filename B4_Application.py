@@ -48,8 +48,8 @@ def info_page(window, A: B4_Automata.Automata, func, name):
 
     if automata == det_automata:
         warning = "L'automate l'est déjà"
-        window.addstr(height - 5, get_middle(warning, width), warning)
-        threading.Timer(3, erase_warning, [window, warning, get_middle(warning, width), height - 5]).start()
+        window.addstr(height - 7, get_middle(warning, width), warning)
+        threading.Timer(3, erase_warning, [window, warning, get_middle(warning, width), height - 7]).start()
         return False
 
     if det_automata == ['']:
@@ -114,6 +114,7 @@ def word_test_page(window, automata: B4_Automata.Automata, n_automata):
         word = box.gather().strip()
         answer = str(automata.test_word(word.strip()))
 
+        erase_warning(window, width*' ', 0, start_y + 5)
         window.addstr(start_y + 5, get_middle(f"Mot : '{word}'", width), f"Mot : '{word}'")
 
         window.addstr(start_y + 7, 0, width * ' ')
@@ -244,7 +245,7 @@ def main_page(window):
 
     window.addstr(height - 1, 0, statusbarstr, curses.color_pair(3))
 
-    prompt = "Entrez de numéro de l'automate : "
+    prompt = "Entrez le numéro de l'automate : "
     window.addstr(start_y + 5, get_middle(prompt, width), prompt)
 
     win_x = get_middle(4 * " ", width)
@@ -288,6 +289,7 @@ def main_loop(window):
             automata_page(window, num)
 
             window.addstr(10, 10, str(num))
+
     except KeyboardInterrupt:
         return
 

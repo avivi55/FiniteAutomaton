@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="word testing implimented v1" />
+    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="word testing implemented v1">
+      <change beforePath="$PROJECT_DIR$/.idea/L2FiniteAutomaton.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/L2FiniteAutomaton.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/B4_Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_Application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/B4_Automata.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_Automata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/automaton/B4-0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/automaton/B4-0.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/automata.dot" beforeDir="false" afterPath="$PROJECT_DIR$/dot/automata.dot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/automata.gif" beforeDir="false" afterPath="$PROJECT_DIR$/out/automata.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,7 +60,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
     &quot;settings.editor.splitter.proportion&quot;: &quot;0.30692077&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -170,7 +181,8 @@
       <workItem from="1678195125107" duration="6080000" />
       <workItem from="1678212187239" duration="2444000" />
       <workItem from="1678265115200" duration="11886000" />
-      <workItem from="1678308870966" duration="29478000" />
+      <workItem from="1678308870966" duration="44514000" />
+      <workItem from="1678480552747" duration="1237000" />
     </task>
     <task id="LOCAL-00001" summary="added main loop, better formating">
       <created>1677231392963</created>
@@ -298,7 +310,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678386895471</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="word testing implemented v1">
+      <created>1678386997880</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1678386997880</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -331,7 +350,8 @@
     <MESSAGE value="Probably finished app" />
     <MESSAGE value="Basic App (could have upgrade)" />
     <MESSAGE value="word testing implimented v1" />
-    <option name="LAST_COMMIT_MESSAGE" value="word testing implimented v1" />
+    <MESSAGE value="word testing implemented v1" />
+    <option name="LAST_COMMIT_MESSAGE" value="word testing implemented v1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -347,6 +367,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/L2FiniteAutomaton$main.coverage" NAME="main Coverage Results" MODIFIED="1678197259341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/L2FiniteAutomaton$Application.coverage" NAME="Application Coverage Results" MODIFIED="1678282580636" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$tests.coverage" NAME="tests Coverage Results" MODIFIED="1678382435147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$tests.coverage" NAME="tests Coverage Results" MODIFIED="1678468123971" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
