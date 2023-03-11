@@ -499,6 +499,9 @@ class Automata:
 
         return False
 
+    def get_minimized(self):
+        ...
+
     def get_complementary(self):
         complementary = deepcopy(self.get_determinized())
 
