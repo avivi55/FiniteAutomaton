@@ -11,6 +11,12 @@ import subprocess
 
 
 def open_image(path):
+    """
+    Opens an image in the default viewer for the operating system.
+
+    :param path: Specify the path to the image file
+    :return: Nothing, it just opens the image in your default browser
+    """
     command = {'linux': 'xdg-open',
                'win32': 'explorer',
                'darwin': 'open'}[sys.platform]
@@ -110,19 +116,12 @@ class Automata:
 
     def _give_state_behaviour_(self, state: str, arrows: bool = True) -> str:
         """
-        Indicates whether a state is terminal, initial or both
+        Returns an indication of the initial or/and terminal behaviour of a state.
 
-        Parameters
-        -------
-        state
-            The state to analyse
-        arrows
-            The fancy notation or with letters
-
-        Returns
-        -------
-        str
-            An indication of initial or/and terminal behaviour of the state
+        :param self: Refer to the object itself
+        :param state: str: Indicate the state to analyse
+        :param arrows: bool: Indicate whether the fancy notation or with letters should be used
+        :return: An indication of initial or/and terminal behaviour of the state
         """
         if state in self.entrees and state in self.exits:
             return '<-->' if arrows else 'E S'
@@ -137,35 +136,23 @@ class Automata:
 
     def _fetch_transition_(self, state: str, letter: str) -> list[str]:
         """
-        Gets the list of states the `state` is going to with the letter `letter`
+        Returns the list of states that are in the transition dict for a given state and letter.
+        If there is no such state, it will return an empty list.
 
-        Parameters
-        -------
-        state
-            The state to get
-        letter
-            the letter
-
-        Returns
-        -------
-        list[str]
-            the list of states in the transition dict
+        :param self: Represent the instance of the class
+        :param state: str: The state
+        :param letter: str: Get the letter that is being used to transition from one state to another
+        :return: A list of states the state is going to with the letter
         """
         return self.transitions.get(state).get(letter) or []
 
     def _populate_from_file_(self, path: str) -> dict[str, dict[str, list[str]]]:
         """
-        Fills the transition dict with a .txt file
+        Fills the transition dict with a .txt file.
 
-        Parameters
-        -------
-        path
-            the path of the .txt file
-
-        Returns
-        -------
-        Automata
-            self
+        :param self: Refer to the object itself
+        :param path: str: Get the path of the file
+        :return: The `self.transitions` dict
         """
         with open(path, 'r') as f:
             fa_data = f.readlines()
@@ -218,19 +205,15 @@ class Automata:
 
     def _different_transitions_dict_(self) -> dict[str, dict[str, list]]:
         """
-        Creates a different organization for the transition dict
+        Takes the transitions dictionary and reorganizes it.
+        The original transitions dictionary has the following structure:
+        {
+            'state' : {
+                'letter' : [ 'state', ... ],  # The list of states can be empty, but there will always be at least one letter key.
+                ...                           # There may also be multiple letters for each state in this list.  This is why we need to reorganize it!
 
-        Returns
-        -------
-        dict
-            {
-                'state1' : {
-                    'state1' : [ 'letter1' ],
-                    'state2' : [ 'letter1' ],
-                    'state3' : [ 'letter2' ],
-                },
-                ...
-            }
+        :param self: Access the attributes of the class
+        :return: A dictionary with the states as keys and a dictionary of transitions from that state as values
         """
         dic = {}
         for state, transitions in self.transitions.items():
@@ -244,31 +227,46 @@ class Automata:
         return dic
 
     def _state_is_empty_(self, state: str, letter: str) -> bool:
+        """
+        Checks if a state is empty.
+
+        :param self: Access the attributes of the class
+        :param state: str: Determine the state that is being checked
+        :param letter: str: Check if the transition is empty
+        :return: True if the state is empty
+        """
         return not self._fetch_transition_(state, letter) \
             or self._fetch_transition_(state, letter) == ['']
 
     def get_info(self):
+        """
+        Returns a string containing the following information:
+            - The number of transitions in the automaton.
+            - Whether it is standard, determinate and complete.
+            - The alphabet used by the automaton.
+
+        :param self: Refer to the current object
+        :return: A string containing the information of the automaton
+        """
         headers = ["Standard", "Détérminé", "Complet", "transitions", "n°entrée", "n°sortie"]
         table = [[
-                  str(self.is_standard()),
-                  str(self.is_determinate()),
-                  str(self.is_complete()),
-                  str(len(self)),
-                  str(len(self.entrees)),
-                  str(len(self.exits))
-                 ]]
+            str(self.is_standard()),
+            str(self.is_determinate()),
+            str(self.is_complete()),
+            str(len(self)),
+            str(len(self.entrees)),
+            str(len(self.exits))
+        ]]
 
         return f"{tabulate.tabulate(table, headers, tablefmt='rounded_grid')}\n" \
                f"{tabulate.tabulate([['{' + ', '.join(self.alphabet) + '}']], ['Alphabet'], tablefmt='rounded_grid')}"
 
     def is_e_nfa(self) -> bool:
         """
-        Gives whether the automata hase epsilon transitions
+        Checks if the NFA is an epsilon-NFA.
 
-        Returns
-        -------
-        bool
-            has epsilon transition
+        :param self: Access the attributes of the class
+        :return: True if the machine has an epsilon transition
         """
         for state, transitions in self.transitions.items():
             for trans in transitions:
@@ -279,12 +277,10 @@ class Automata:
 
     def to_dot_format(self) -> str:
         """
-        Transforms the transition dict to a string in the dot format
+        Converts the finite state machine into a dot format.
 
-        Returns
-        -------
-        str
-            the dot file
+        :param self: Refer to the current instance of a class
+        :return: A string in the dot format, which can be used to display the automaton graphically
         """
         to_dot = "digraph finite_state_machine { rankdir=LR\n"
 
@@ -309,6 +305,12 @@ class Automata:
         return to_dot
 
     def is_standard(self) -> bool:
+        """
+        Checks if the automaton is standard.
+
+        :param self: Refer to the object itself
+        :return: True if the automaton is standard, and false otherwise
+        """
         if len(self.entrees) != 1:
             return False
 
@@ -320,6 +322,12 @@ class Automata:
         return True
 
     def get_standard(self) -> Automata:
+        """
+        Transforms a non-standard automata into a standard one.
+
+        :param self: Refer to the instance of the class
+        :return: A standard automaton
+        """
         if self.is_standard():
             return self
 
@@ -339,6 +347,12 @@ class Automata:
         return standard
 
     def is_complete(self) -> bool:
+        """
+        Checks if the automata is complete.
+
+        :param self: Represent the instance of the class
+        :return: A boolean value
+        """
         for state in self.transitions.keys():
             for letter in self.alphabet:
                 if self._state_is_empty_(state, letter):
@@ -346,6 +360,13 @@ class Automata:
         return True
 
     def get_complete(self) -> Automata:
+        """
+        Takes an automata and returns a complete version of it.
+            If the automata is already complete, then it will return itself.
+
+        :param self: Refer to the current object
+        :return: A complete automata
+        """
         if self.is_complete():
             return self
 
@@ -362,6 +383,12 @@ class Automata:
         return complete
 
     def is_determinate(self) -> bool:
+        """
+        Checks if the automaton is determinate.
+
+        :param self: Refer to the object itself
+        :return: A boolean value that indicates whether the automaton is determinate
+        """
         if len(self.entrees) != 1:
             return False
 
@@ -373,6 +400,22 @@ class Automata:
         return True
 
     def get_determinized(self, step: bool = False) -> Automata | list[Automata]:
+        """
+        Takes an automata and returns a new automata that is equivalent to the original but is determinate.
+
+        Clarifications :
+        This function works by first creating a new automata with the same alphabet as the original,
+        and then adding all the states from the original to this new one.
+        The transitions are then added in such a way that they are deterministic
+        (i.e., there can only be one transition for each letter).
+
+        If there were multiple possible transitions for any given letter,
+        these transitions will be combined into one state which contains all of them.
+
+        :param self: Access the attributes of the class
+        :param step: bool: Determine if the function should return a list of automatas or just one
+        :return: A list of automata objects if step is true, otherwise it returns a single automata object
+        """
         if self.is_e_nfa():
             return self
 
@@ -480,6 +523,13 @@ class Automata:
     # BONUS #
 
     def test_word(self, word) -> bool:
+        """
+        Takes a word as an argument and returns True if the word is accepted by the automaton, and False otherwise.
+
+        :param self: Bind the method to an object
+        :param word: Test the word on the automaton
+        :return: True if the word is accepted by the automaton and false otherwise
+        """
         if False in [letter in self.alphabet + ['E', 'ε'] for letter in word]:
             return False
 
@@ -499,8 +549,18 @@ class Automata:
 
         return False
 
+    def get_minimized(self):
+        ...
 
     def get_complementary(self):
+        """
+        Returns a new DFA that accepts the complement of the language accepted by this DFA.
+        The complement is defined as all strings not in the language.
+
+
+        :param self: Access the attributes of the class
+        :return: The complementary of the automaton
+        """
         complementary = deepcopy(self.get_determinized())
 
         non_exits = [state for state in complementary.transitions.keys() if state not in complementary.exits]
