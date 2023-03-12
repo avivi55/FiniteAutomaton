@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="word testing implemented v1">
-      <change beforePath="$PROJECT_DIR$/.idea/L2FiniteAutomaton.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/L2FiniteAutomaton.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="Documentations">
       <change beforePath="$PROJECT_DIR$/B4_Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_Application.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/B4_Automata.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_Automata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/automaton/B4-0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/automaton/B4-0.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dot/automata.dot" beforeDir="false" afterPath="$PROJECT_DIR$/dot/automata.dot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/automata.gif" beforeDir="false" afterPath="$PROJECT_DIR$/out/automata.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/B4_AutomataAnimation.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_AutomataAnimation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/anim/automata/strandardize.gif" beforeDir="false" afterPath="$PROJECT_DIR$/anim/automata/strandardize.gif" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +30,13 @@
     <option name="myEnvs">
       <map>
         <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="minimizing" />
       </map>
     </option>
   </component>
@@ -151,6 +152,8 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.B4_Application" />
+        <item itemvalue="Python.B4_Application" />
         <item itemvalue="Python.B4_Application" />
       </list>
     </recent_temporary>
@@ -317,7 +320,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678386997880</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Documentations">
+      <created>1678626278696</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1678626278696</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -351,7 +361,8 @@
     <MESSAGE value="Basic App (could have upgrade)" />
     <MESSAGE value="word testing implimented v1" />
     <MESSAGE value="word testing implemented v1" />
-    <option name="LAST_COMMIT_MESSAGE" value="word testing implemented v1" />
+    <MESSAGE value="Documentations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Documentations" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

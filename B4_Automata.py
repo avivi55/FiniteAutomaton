@@ -1,6 +1,4 @@
 from __future__ import annotations
-from typing import Dict, List
-
 import graphviz
 import tabulate
 import string
@@ -8,6 +6,7 @@ import os
 from copy import deepcopy
 import sys
 import subprocess
+from pathlib import Path
 
 
 def open_image(path):
@@ -20,7 +19,7 @@ def open_image(path):
     command = {'linux': 'xdg-open',
                'win32': 'explorer',
                'darwin': 'open'}[sys.platform]
-    subprocess.Popen([command, path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.Popen([command, Path(path)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 class Automata:
@@ -100,9 +99,9 @@ class Automata:
             pass
 
         graphviz.Source(self.to_dot_format()) \
-            .render(filename=f'dot/{self.output}.dot', outfile=f'out/{self.output}.{self.format}', view=False)
+            .render(filename=Path(f'dot/{self.output}.dot'), outfile=Path(f'out/{self.output}.{self.format}'), view=False)
 
-        open_image(f'out/{self.output}.{self.format}')
+        open_image(Path(f'out/{self.output}.{self.format}'))
 
         return ''
 

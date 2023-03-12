@@ -2,6 +2,7 @@ from B4_Automata import Automata, open_image
 import graphviz
 import os
 from PIL import Image
+from pathlib import Path
 
 
 def scale(image, max_size, method=Image.ANTIALIAS):
@@ -41,11 +42,11 @@ class AutomataAnimation:
         :return: A string
         """
         try:
-            os.mkdir(f"anim/{automata.output}")
+            os.mkdir(Path(f"anim/{automata.output}"))
         except FileExistsError:
             ...
 
-        file = f'anim/{automata.output}/{automata.output}'
+        file = Path(f'anim/{automata.output}/{automata.output}')
 
         file_names = [f'{file}_base.png',
                       f'{file}_std.png']
@@ -60,11 +61,11 @@ class AutomataAnimation:
         m = max([im.size for im in images])
         images = [scale(img, m) for img in images]
 
-        images[0].save(f"anim/{automata.output}/strandardize.gif",
+        images[0].save(Path(f"anim/{automata.output}/strandardize.gif"),
                        save_all=True, append_images=images[1:], optimize=False, duration=2000, loop=0)
 
         if view:
-            open_image(f"anim/{automata.output}/strandardize.gif")
+            open_image(Path(f"anim/{automata.output}/strandardize.gif"))
 
         for f in file_names:
             os.remove(f)
@@ -90,9 +91,9 @@ class AutomataAnimation:
         steps: list[object | Automata] = automata.get_determinized(step=True)
         steps = [automata] + steps
 
-        file = f'anim/{automata.output}/{automata.output}'
+        file = Path(f'anim/{automata.output}/{automata.output}')
 
-        file_names = [f'{file}_{i}.png' for i in range(len(steps))]
+        file_names = [Path(f'{file}_{i}.png') for i in range(len(steps))]
 
         for f, s in zip(file_names, steps):
             graphviz.Source(s.to_dot_format()) \
@@ -102,11 +103,11 @@ class AutomataAnimation:
         m = max([im.size for im in images])
         images = [scale(img, m) for img in images]
 
-        images[0].save(f"anim/{automata.output}/determinize.gif",
+        images[0].save(Path(f"anim/{automata.output}/determinize.gif"),
                        save_all=True, append_images=images[1:], optimize=False, duration=duration * 1000, loop=0)
 
         if view:
-            open_image(f"anim/{automata.output}/determinize.gif")
+            open_image(Path(f"anim/{automata.output}/determinize.gif"))
 
         for f in file_names:
             os.remove(f)
