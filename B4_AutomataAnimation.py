@@ -4,11 +4,18 @@ import os
 from PIL import Image
 
 
-# STOLEN from : https://gist.github.com/fabeat/6621507?permalink_comment_id=2378878#gistcomment-2378878
 def scale(image, max_size, method=Image.ANTIALIAS):
     """
-    resize 'image' to 'max_size' keeping the aspect ratio
-    and place it in center of white 'max_size' image
+    Takes an image, a max_size tuple and a method.
+    The function resizes the image to the max_size keeping the aspect ratio
+    and places it in center of white 'max_size' image.
+
+    taken from : https://gist.github.com/fabeat/6621507?permalink_comment_id=2378878#gistcomment-2378878
+
+    :param image: Pass the image to be resized
+    :param max_size: Set the maximum size of the image
+    :param method: Specify the resampling filter
+    :return: A scaled image
     """
     image.thumbnail(max_size, method)
     offset = (int((max_size[0] - image.size[0]) / 2), int((max_size[1] - image.size[1]) / 2))
@@ -26,6 +33,13 @@ class AutomataAnimation:
 
     @staticmethod
     def standardize_animation(automata: Automata, view: bool = False):
+        """
+        Takes an automata and a boolean value as arguments.
+
+        :param automata: Automata: Get the automata that is going to be standardized
+        :param view: bool: Determine whether the animation should be opened after it has been created
+        :return: A string
+        """
         try:
             os.mkdir(f"anim/{automata.output}")
         except FileExistsError:
@@ -60,6 +74,14 @@ class AutomataAnimation:
 
     @staticmethod
     def determinize_animation(automata: Automata, duration: int = 2, view=False):
+        """
+        Takes an automata and a duration as input.
+
+        :param automata: Automata: Get the automata object
+        :param duration: int: Set the duration of each image in the gif
+        :param view: Open the image in a new window
+        :return: A string
+        """
         try:
             os.mkdir(f"anim/{automata.output}")
         except FileExistsError:
