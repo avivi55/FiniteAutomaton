@@ -1,19 +1,33 @@
 digraph finite_state_machine { rankdir=LR
 	node [shape=doublecircle]
-	"1"
+	"1-2-3-4"
+	"2-3"
+	"1-2"
+	"0"
+	"3-4"
+	"P"
 
 	node [shape=circle]
 	fake0 [style=invisible]
-	fake0 -> "1"
+	fake0 -> "1-2-3-4"
 
-	"0" -> "3" [label="a, c"] 
-	"0" -> "1" [label="b"] 
-	"3" -> "3" [label="a, b, c"] 
-	"1" -> "0" [label="a"] 
-	"1" -> "2" [label="b"] 
-	"1" -> "P" [label="c"] 
-	"2" -> "1" [label="a"] 
-	"2" -> "4" [label="b, c"] 
-	"4" -> "4" [label="a, b, c"] 
-	"P" -> "P" [label="a, b, c"] 
+	"1-2-3-4" -> "1-2" [label="a"] 
+	"1-2-3-4" -> "2-3" [label="b"] 
+	"1-2-3-4" -> "3-4" [label="c"] 
+	"1-2-3-4" -> "4-5" [label="d"] 
+	"2-3" -> "P" [label="a, d"] 
+	"2-3" -> "2-3" [label="b"] 
+	"2-3" -> "3-4" [label="c"] 
+	"1-2" -> "1-2" [label="a"] 
+	"1-2" -> "2-3" [label="b"] 
+	"1-2" -> "P" [label="c, d"] 
+	"4-5" -> "0" [label="a, b, c"] 
+	"4-5" -> "0-4-5" [label="d"] 
+	"0-4-5" -> "0" [label="a, b, c"] 
+	"0-4-5" -> "0-4-5" [label="d"] 
+	"0" -> "P" [label="a, b, c, d"] 
+	"3-4" -> "P" [label="a, b"] 
+	"3-4" -> "3-4" [label="c"] 
+	"3-4" -> "4-5" [label="d"] 
+	"P" -> "P" [label="a, b, c, d"] 
 }

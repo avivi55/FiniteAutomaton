@@ -248,7 +248,7 @@ class Automata:
         :param self: Refer to the current object
         :return: A string containing the information of the automaton
         """
-        headers = ["Standard", "Détérminé", "Complet", "transitions", "n°entrée", "n°sortie"]
+        headers = ["Standard", "Déterministe", "Complet", "Transitions", "n°Entrée", "n°Sortie"]
         table = [[
             str(self.is_standard()),
             str(self.is_determinate()),
@@ -438,8 +438,8 @@ class Automata:
         new_entree = {}
         for state in self.entrees:
             for letter in self.transitions.get(state):
-                if new_entree.get(letter):
-                    new_entree[letter] += self._fetch_transition_(state, letter).copy()
+                if n_e := new_entree.get(letter):
+                    n_e += self._fetch_transition_(state, letter).copy()
                 else:
                     new_entree[letter] = self._fetch_transition_(state, letter).copy()
 
@@ -479,9 +479,8 @@ class Automata:
 
             det_tr[cur_state] = {}
 
-            if self.transitions.get(cur_state):
-                letter: str
-                for letter, to_state in self.transitions.get(cur_state).items():
+            if trans := self.transitions.get(cur_state):
+                for letter, to_state in trans.items():
                     det_tr[cur_state][letter] = ['-'.join(to_state)]
 
                 if cur_state in self.exits:
@@ -539,7 +538,6 @@ class Automata:
         cur_state = self.entrees[0]
 
         for i, letter in enumerate(word):
-            # print(cur_state)
             next_state = self._fetch_transition_(cur_state, letter)[0]
 
             cur_state = next_state
@@ -550,7 +548,100 @@ class Automata:
         return False
 
     def get_minimized(self):
-        ...
+        """
+        Minimizes the given automaton using the Moore's algorithm.
+
+        :param self: Access the attributes of the class
+        :return: A new minimized automata object
+        """
+        # Step 1: Convert the automaton to a determinate one
+
+        minimized = Automata()
+        minimized.transitions['0'] = {letter: ['0'] for letter in self.alphabet}
+        minimized.alphabet = self.alphabet.copy()
+        minimized.entrees = ['0']
+
+        if not len(self.exits):
+            return minimized
+        elif len(self.entrees) == len(self.transitions.keys()):
+            minimized.exits = ['0']
+            return minimized
+
+        del minimized
+
+        if not self.is_determinate():
+            determinized = deepcopy((self.get_determinized()))
+        else:
+            determinized = deepcopy(self)
+
+        # Step 2: Create initial partition
+        accepting_states = determinized.exits.copy()
+        non_accepting_states = [state for state in determinized.transitions.keys() if state not in self.exits]
+        partition = [accepting_states, non_accepting_states]
+
+        # Step 3: Initialize queue
+        queue = partition.copy()
+
+        # Step 4: Split states until no more splits possible
+        while queue:
+            group = queue.pop(0)
+            for letter in determinized.alphabet:
+                transitions = {}
+                for state in group:
+                    for to_state in determinized._fetch_transition_(state, letter):
+                        for i, part in enumerate(partition):
+                            if to_state in part:
+                                transitions.setdefault(i, []).append(state)
+                                break
+
+                if len(transitions) <= 1:
+                    continue
+
+                # Split the group
+                new_partition = []
+                for i in sorted(transitions):
+                    states = transitions[i]
+                    if len(states) == 1:
+                        new_partition.append(states)
+                    else:
+                        new_partition.extend([states[j:j + 1] for j in range(0, len(states), 1)])
+                try:
+                    partition.remove(group)
+                except ValueError:
+                    for i in group:
+                        if [i] in partition:
+                            partition.remove([i])
+
+                partition.extend(new_partition)
+                queue.extend(new_partition)
+
+        minimized = Automata()
+        minimized.alphabet = determinized.alphabet.copy()
+
+        partition = ['_'.join(states) for states in partition]
+
+        for i in partition:
+            ...
+
+        minimized.transitions = {states: {letter: [] for letter in self.alphabet} for states in partition}
+
+        for state in partition:
+            split_states = state.split('_')
+
+            for i in split_states:
+                if i in determinized.exits:
+                    minimized.exits.append(state)
+                if i in determinized.entrees:
+                    minimized.entrees.append(state)
+                minimized.transitions[state] |= determinized.transitions.get(i)
+
+        minimized.exits = list(set(minimized.exits))
+        minimized.entrees = list(set(minimized.entrees))
+
+        # print(determinized.transitions)
+        # print(minimized.transitions)
+
+        return minimized
 
     def get_complementary(self):
         """
