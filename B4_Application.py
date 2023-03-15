@@ -7,6 +7,14 @@ from B4_AutomataAnimation import AutomataAnimation as Anim
 
 
 def get_middle(text, width):
+    """
+    Returns the middle of the text, based on the width given.
+    If there is no exact middle (i.e., if it's an even number), then return the left middle.
+
+    :param text: Specify what text to print in the middle of the box
+    :param width: Determine the width of the box
+    :return: The middle of the text
+    """
     return int((width // 2) - (len(text) // 2) - len(text) % 2)
 
 
@@ -17,6 +25,13 @@ def erase_warning(window, warning, x, y):
 
 
 def get_guide(guide, width):
+    """
+    Takes in a dictionary of keybindings and returns a list of string that are formatted to be printed out as the guide.
+
+    :param guide: Get the keybindings for each category
+    :param width: Determine the width of the guide
+    :return: A list of strings that are the keybindings
+    """
     guide_s = []
 
     for category, keybinds in guide.items():
@@ -131,6 +146,16 @@ def word_test_page(window, automata: B4_Automata.Automata, n_automata):
 
 
 def automata_page(window, n_automata):
+    """
+    The automata_page function is the main function of the program.
+    It displays an automata and allows you to interact with it.
+    You can see its info, standardize it, determinize it, complete it or test words on the automata.
+    You can also display a graph of these automata using Graphviz or animate its standardization/determinization.
+
+    :param window: The window
+    :param n_automata: Display the number of the automata in the title
+    :return: None
+    """
     height, width = window.getmaxyx()
     automata = B4_Automata.Automata(source_file=f"automaton/B4-{n_automata}.txt")
     automata_lst = str(automata).split('\n')
@@ -232,6 +257,15 @@ def automata_page(window, n_automata):
 
 
 def main_page(window):
+    """
+    The function called when the program starts.
+    It displays a title, a subtitle and an input box to enter the number of automata you want to use.
+    The user can only enter numbers between 0 and 44 (included).
+    If he enters something else, an error message will be displayed.
+
+    :param window: The window
+    :return: The automata number
+    """
     window.clear()
     window.refresh()
 
@@ -278,6 +312,15 @@ def main_page(window):
 
 
 def main_loop(window):
+    """
+    The main function of the program. It handles all
+    the curses functionality and calls other functions to display information on
+    the screen. The main_loop function also handles user input, which is used to
+    determine what page should be displayed next.
+
+    :param window: The window
+    :return: None
+    """
     try:
         window.clear()
         window.refresh()
