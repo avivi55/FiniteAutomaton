@@ -63,8 +63,8 @@ def info_page(window, A: B4_Automata.Automata, func, name):
 
     if automata == det_automata:
         warning = "L'automate l'est déjà"
-        window.addstr(height - 7, get_middle(warning, width), warning)
-        threading.Timer(3, erase_warning, [window, warning, get_middle(warning, width), height - 7]).start()
+        window.addstr(height - 10, get_middle(warning, width), warning)
+        threading.Timer(3, erase_warning, [window, warning, get_middle(warning, width), height - 10]).start()
         return False
 
     if det_automata == ['']:
@@ -175,13 +175,14 @@ def automata_page(window, n_automata):
             "<Space>": "Seulement l'automate"
         },
         "Commandes :": {
-            "M": "Page principale",
+            "P": "Page principale",
             "I": "Information",
             "C": "Compléter",
             "S": "Standardiser",
             "D": "Détérminiser",
-            "P": "Complémentaire",
-            "W": "Test de mots"
+            "O": "Complémentaire",
+            "W": "Test de mots",
+            "M": "Minimiser"
         },
         "Rendu graphique simple :": {
             "F1": "Automtate de base",
@@ -196,11 +197,14 @@ def automata_page(window, n_automata):
     }
 
     guide_s = get_guide(guide, width)
+    clear = True
     while True:
         height, width = window.getmaxyx()
 
         if not no_change:
-            window.clear()
+            if clear:
+                window.clear()
+                clear = False
             for i, line in enumerate(automata_lst):
                 window.addstr(start_y + i, get_middle(line, width), line)
             window.refresh()
@@ -213,7 +217,7 @@ def automata_page(window, n_automata):
         k = window.getch()
 
         match chr(k):
-            case 'm' | 'M':
+            case 'p' | 'P':
                 return
             case 'd' | 'D':
                 no_change = info_page(window, automata, lambda x: x.get_determinized(), "Détérminisé et Complet")
@@ -223,11 +227,14 @@ def automata_page(window, n_automata):
                 no_change = info_page(window, automata, lambda x: x.get_standard(), "Standard")
             case 'c' | 'C':
                 no_change = info_page(window, automata, lambda x: x.get_complete(), "Complet")
-            case 'p' | 'P':
+            case 'o' | 'O':
                 no_change = info_page(window, automata, lambda x: x.get_complementary(),
                                       "Automate langage complémentaire de l'automate déterminisé")
             case 'w' | 'W':
                 no_change = word_test_page(window, automata, n_automata)
+                clear = True
+            case 'm' | 'M':
+                no_change = info_page(window, automata, lambda x: x.get_minimized(), "Minime")
             case _:
                 match k:
                     case f._1:
@@ -244,6 +251,7 @@ def automata_page(window, n_automata):
                         no_change = info_page(window, automata, lambda x: Anim.determinize_animation(x, view=True), "")
                     case 32: #space
                         no_change = False
+                        clear = True
                     case _:
                         no_change = True
 

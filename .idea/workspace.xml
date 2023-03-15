@@ -185,7 +185,8 @@
       <workItem from="1678212187239" duration="2444000" />
       <workItem from="1678265115200" duration="11886000" />
       <workItem from="1678308870966" duration="44514000" />
-      <workItem from="1678480552747" duration="1237000" />
+      <workItem from="1678480552747" duration="1859000" />
+      <workItem from="1678799914600" duration="6854000" />
     </task>
     <task id="LOCAL-00001" summary="added main loop, better formating">
       <created>1677231392963</created>
@@ -378,6 +379,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/L2FiniteAutomaton$main.coverage" NAME="main Coverage Results" MODIFIED="1678197259341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/L2FiniteAutomaton$Application.coverage" NAME="Application Coverage Results" MODIFIED="1678282580636" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$tests.coverage" NAME="tests Coverage Results" MODIFIED="1678468123971" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$tests.coverage" NAME="tests Coverage Results" MODIFIED="1678719049652" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
