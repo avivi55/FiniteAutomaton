@@ -42,7 +42,7 @@ class AutomataAnimation:
         :return: A string
         """
         try:
-            os.mkdir(Path(f"anim/{automata.output}"))
+            os.mkdir(Path(f"out/anim/{automata.output}"))
         except FileExistsError:
             ...
 
@@ -61,11 +61,11 @@ class AutomataAnimation:
         m = max([im.size for im in images])
         images = [scale(img, m) for img in images]
 
-        images[0].save(Path(f"anim/{automata.output}/strandardize.gif"),
+        images[0].save(Path(f"out/anim/{automata.output}/strandardize.gif"),
                        save_all=True, append_images=images[1:], optimize=False, duration=2000, loop=0)
 
         if view:
-            open_image(Path(f"anim/{automata.output}/strandardize.gif"))
+            open_image(Path(f"out/anim/{automata.output}/strandardize.gif"))
 
         for f in file_names:
             os.remove(f)
@@ -84,14 +84,14 @@ class AutomataAnimation:
         :return: A string
         """
         try:
-            os.mkdir(f"anim/{automata.output}")
+            os.mkdir(f"out/anim/{automata.output}")
         except FileExistsError:
             ...
 
         steps: list[object | Automata] = automata.get_determinized(step=True)
         steps = [automata] + steps
 
-        file = Path(f'anim/{automata.output}/{automata.output}')
+        file = Path(f'out/anim/{automata.output}/{automata.output}')
 
         file_names = [Path(f'{file}_{i}.png') for i in range(len(steps))]
 
@@ -103,11 +103,11 @@ class AutomataAnimation:
         m = max([im.size for im in images])
         images = [scale(img, m) for img in images]
 
-        images[0].save(Path(f"anim/{automata.output}/determinize.gif"),
+        images[0].save(Path(f"out/anim/{automata.output}/determinize.gif"),
                        save_all=True, append_images=images[1:], optimize=False, duration=duration * 1000, loop=0)
 
         if view:
-            open_image(Path(f"anim/{automata.output}/determinize.gif"))
+            open_image(Path(f"out/anim/{automata.output}/determinize.gif"))
 
         for f in file_names:
             os.remove(f)

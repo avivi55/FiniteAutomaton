@@ -74,14 +74,14 @@ def info_page(window, A: B4_Automata.Automata, func, name):
 
     x = 2 * margin + len(automata[0])
 
-    window.addstr(start_y - 2, margin, "Base : ")
-    window.addstr(start_y - 2, x, f"{name} : ")
+    window.addstr(start_y - 2, margin, "Base : "[:width])
+    window.addstr(start_y - 2, x, f"{name} : "[:width])
 
     for i, line in enumerate(automata):
-        window.addstr(start_y + i, margin, line)
+        window.addstr(start_y + i, margin, line[:width])
 
     for i, line in enumerate(det_automata):
-        window.addstr(start_y + i, x, line)
+        window.addstr(start_y + i, x, line[:width])
 
     window.refresh()
 
@@ -97,7 +97,7 @@ def word_test_page(window, automata: B4_Automata.Automata, n_automata):
     start_y = get_middle(len(automata_lst) * ' ', height)
 
     prompt = "Entrez un mot de test : "
-    window.addstr(start_y - 2, get_middle(prompt, width), prompt)
+    window.addstr(start_y - 2, get_middle(prompt, width), prompt[:width])
 
     win_x = get_middle(20 * " ", width)
     win = curses.newwin(1, 20, start_y + 1, win_x)
@@ -114,15 +114,15 @@ def word_test_page(window, automata: B4_Automata.Automata, n_automata):
 
     while True:
         for i, line in enumerate(automata_lst):
-            window.addstr(start_y + 10 + i, get_middle(line, width), line)
+            window.addstr(start_y + 10 + i, get_middle(line, width), line[:width])
 
         for i, line in enumerate(guide_s):
-            window.addstr((height - len(guide_s)) + i, 0, line, curses.color_pair(3))
+            window.addstr((height - len(guide_s)) + i, 0, line[:width], curses.color_pair(3))
 
-        window.addstr(start_y - 7, get_middle(f"Automate n°{n_automata}", width), f"Automate n°{n_automata}", curses.A_UNDERLINE)
+        window.addstr(start_y - 7, get_middle(f"Automate n°{n_automata}", width), f"Automate n°{n_automata}"[:width], curses.A_UNDERLINE)
 
         warning = "L'automate à été automatiquement déterminisé pour faire le test de mot"
-        window.addstr(start_y - 5, get_middle(warning, width), warning, curses.A_BOLD)
+        window.addstr(start_y - 5, get_middle(warning, width), warning[:width], curses.A_BOLD)
 
         window.refresh()
         box.edit()
@@ -130,10 +130,10 @@ def word_test_page(window, automata: B4_Automata.Automata, n_automata):
         answer = str(automata.test_word(word.strip()))
 
         erase_warning(window, width*' ', 0, start_y + 5)
-        window.addstr(start_y + 5, get_middle(f"Mot : '{word}'", width), f"Mot : '{word}'")
+        window.addstr(start_y + 5, get_middle(f"Mot : '{word}'", width), f"Mot : '{word}'"[:width])
 
-        window.addstr(start_y + 7, 0, width * ' ')
-        window.addstr(start_y + 7, get_middle(answer, width), answer)
+        window.addstr(start_y + 7, 0, width * ' '[:width])
+        window.addstr(start_y + 7, get_middle(answer, width), answer[:width])
 
         window.move(0, 0)
 
@@ -206,13 +206,13 @@ def automata_page(window, n_automata):
                 window.clear()
                 clear = False
             for i, line in enumerate(automata_lst):
-                window.addstr(start_y + i, get_middle(line, width), line)
+                window.addstr(start_y + i, get_middle(line, width), line[:width])
             window.refresh()
 
-        window.addstr(start_y - 7, get_middle(f"Automate n°{n_automata}", width), f"Automate n°{n_automata}", curses.A_UNDERLINE)
+        window.addstr(start_y - 7, get_middle(f"Automate n°{n_automata}", width), f"Automate n°{n_automata}"[:width], curses.A_UNDERLINE)
 
         for i, line in enumerate(guide_s):
-            window.addstr((height - len(guide_s)) + i, 0, line, curses.color_pair(3))
+            window.addstr((height - len(guide_s)) + i, 0, line[:width], curses.color_pair(3))
 
         k = window.getch()
 
@@ -277,18 +277,18 @@ def main_page(window):
 
     start_y = int((height // 2) - 2)
 
-    window.addstr(0, 0, "Jacques Soghomonyan")
-    window.addstr(1, 0, "Nicolas Chalumeau")
-    window.addstr(2, 0, "Antoine Ribot")
-    window.addstr(3, 0, "Adrien Pouyat")
-    window.addstr(start_y, get_middle(title, width), title, curses.color_pair(2) | curses.A_BOLD)
-    window.addstr(start_y + 1, get_middle(subtitle, width), subtitle)
+    window.addstr(0, 0, "Jacques Soghomonyan"[:width])
+    window.addstr(1, 0, "Nicolas Chalumeau"[:width])
+    window.addstr(2, 0, "Antoine Ribot"[:width])
+    window.addstr(3, 0, "Adrien Pouyat"[:width])
+    window.addstr(start_y, get_middle(title, width), title[:width], curses.color_pair(2) | curses.A_BOLD)
+    window.addstr(start_y + 1, get_middle(subtitle, width), subtitle[:width])
     window.addstr(start_y + 3, (width // 2) - 2, '----')
 
-    window.addstr(height - 1, 0, statusbarstr, curses.color_pair(3))
+    window.addstr(height - 1, 0, statusbarstr[:width], curses.color_pair(3))
 
     prompt = "Entrez le numéro de l'automate : "
-    window.addstr(start_y + 5, get_middle(prompt, width), prompt)
+    window.addstr(start_y + 5, get_middle(prompt, width), prompt[:width])
 
     win_x = get_middle(4 * " ", width)
     win = curses.newwin(1, 3, start_y + 7, win_x)
@@ -305,7 +305,7 @@ def main_page(window):
             break
         else:
             warning: str = "Veuillez entrer un numéro entre 0 et 44 !!"
-            window.addstr(start_y + 9, get_middle(warning, width), warning, curses.color_pair(1) | curses.A_BOLD)
+            window.addstr(start_y + 9, get_middle(warning, width), warning[:width], curses.color_pair(1) | curses.A_BOLD)
             window.refresh()
 
     return automata
@@ -332,6 +332,7 @@ def main_loop(window):
 
         while True:
             window.clear()
+            height, width = window.getmaxyx()
 
             num = main_page(window)
 
@@ -339,7 +340,7 @@ def main_loop(window):
 
             automata_page(window, num)
 
-            window.addstr(10, 10, str(num))
+            window.addstr(10, 10, str(num)[:width])
 
     except KeyboardInterrupt:
         return

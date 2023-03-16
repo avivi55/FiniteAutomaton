@@ -8,6 +8,9 @@ import sys
 import subprocess
 from pathlib import Path
 
+global MAX_HEIGHT
+MAX_HEIGHT = 45
+
 
 def open_image(path):
     """
@@ -87,6 +90,23 @@ class Automata:
         if self.is_e_nfa():
             self.alphabet += 'ε'
 
+    @staticmethod
+    def __cut_in_half__(table: list[list[str]], headers: list[str]):
+        idx = len(table) // 2
+
+        tb1 = table[:idx]
+        tb2 = table[idx:]
+
+        res1 = tabulate.tabulate(tb1, headers, tablefmt="simple_grid").split('\n')
+        res2 = tabulate.tabulate(tb2, headers, tablefmt="simple_grid").split('\n')[::-1]
+        i = 0
+        while res2:
+            cur = res2.pop().strip('\n')
+            res1[i].strip('\n')
+            res1[i] += f" {cur}"
+            i += 1
+        return '\n'.join(res1)
+
     def __str__(self) -> str:
         """
         :return: A table of the automaton
@@ -99,7 +119,14 @@ class Automata:
             ] + [','.join(self._fetch_transition_(k, x)) for x in self.alphabet]
             for k in self]
 
-        return tabulate.tabulate(table, headers, tablefmt="rounded_grid")
+        res = tabulate.tabulate(table, headers, tablefmt="simple_grid")
+
+        print(len(res.split('\n')))
+
+        if len(res.split('\n')) > MAX_HEIGHT:
+            res = self.__cut_in_half__(table, headers)
+
+        return res
 
     def __repr__(self) -> str:
         """
@@ -114,7 +141,7 @@ class Automata:
             pass
 
         graphviz.Source(self.to_dot_format()) \
-            .render(filename=Path(f'dot/{self.output}.dot'), outfile=Path(f'out/{self.output}.{self.format}'), view=False)
+            .render(filename=Path(f'out/dot/{self.output}.dot'), outfile=Path(f'out/{self.output}.{self.format}'), view=False)
 
         open_image(Path(f'out/{self.output}.{self.format}'))
 

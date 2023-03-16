@@ -1,7 +1,7 @@
 from B4_Automata import Automata
 from B4_AutomataAnimation import AutomataAnimation
 
-for i in range(34,35):
+for i in range(32,35):
     current_automata = f"automaton/B4-{i}.txt"
     t = Automata(source_file=current_automata, output_file=f"B4-{i}")
     print(i)
