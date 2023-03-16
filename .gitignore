@@ -1,7 +1,8 @@
 *.pdf
 *.gv
-./.idea
+/.idea
 tex/
 tests.py
-out
+out/
 tests.py
+__pychache__/
