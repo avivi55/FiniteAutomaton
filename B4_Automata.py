@@ -68,7 +68,7 @@ class Automata:
         }
     """
 
-    def __init__(self, source_file="", output_file="automata", out_type="gif"):
+    def __init__(self, source_file="", output_file="", out_type="gif"):
         """
         :param source_file: Populate the automata from a file
         :param output_file: Name the output file
@@ -134,14 +134,15 @@ class Automata:
         """
         try:
             os.mkdir("out")
-            os.mkdir("dot")
         except OSError:
             pass
         else:
             pass
 
         graphviz.Source(self.to_dot_format()) \
-            .render(filename=Path(f'out/dot/{self.output}.dot'), outfile=Path(f'out/{self.output}.{self.format}'), view=False)
+            .render(filename=Path(f'out/{self.output}.dot'), outfile=Path(f'out/{self.output}.{self.format}'), view=False)
+
+        os.remove(Path(f'out/{self.output}.dot'))
 
         open_image(Path(f'out/{self.output}.{self.format}'))
 

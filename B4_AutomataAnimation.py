@@ -28,7 +28,7 @@ def scale(image, max_size, method=Image.ANTIALIAS):
 
 class AutomataAnimation:
     try:
-        os.mkdir(f"anim")
+        os.mkdir(f"out/anim")
     except FileExistsError:
         ...
 
@@ -46,7 +46,7 @@ class AutomataAnimation:
         except FileExistsError:
             ...
 
-        file = Path(f'anim/{automata.output}/{automata.output}')
+        file = f'out/anim/{automata.output}/{automata.output}'
 
         file_names = [f'{file}_base.png',
                       f'{file}_std.png']
@@ -68,8 +68,8 @@ class AutomataAnimation:
             open_image(Path(f"out/anim/{automata.output}/strandardize.gif"))
 
         for f in file_names:
-            os.remove(f)
-            os.remove(f'{f[:-4]}.gv')
+            os.remove(Path(f))
+            os.remove(Path(f.replace("png", "gv")))
 
         return ''
 
@@ -91,9 +91,9 @@ class AutomataAnimation:
         steps: list[object | Automata] = automata.get_determinized(step=True)
         steps = [automata] + steps
 
-        file = Path(f'out/anim/{automata.output}/{automata.output}')
+        file = f'out/anim/{automata.output}/{automata.output}'
 
-        file_names = [Path(f'{file}_{i}.png') for i in range(len(steps))]
+        file_names = [f'{file}_{i}.png' for i in range(len(steps))]
 
         for f, s in zip(file_names, steps):
             graphviz.Source(s.to_dot_format()) \
@@ -110,7 +110,7 @@ class AutomataAnimation:
             open_image(Path(f"out/anim/{automata.output}/determinize.gif"))
 
         for f in file_names:
-            os.remove(f)
-            os.remove(f'{f[:-4]}.gv')
+            os.remove(Path(f))
+            os.remove(Path(f.replace("png", "gv")))
 
         return ''

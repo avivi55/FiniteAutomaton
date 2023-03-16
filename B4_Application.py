@@ -157,7 +157,7 @@ def automata_page(window, n_automata):
     :return: None
     """
     height, width = window.getmaxyx()
-    automata = B4_Automata.Automata(source_file=f"automaton/B4-{n_automata}.txt")
+    automata = B4_Automata.Automata(source_file=f"automaton/B4-{n_automata}.txt", output_file=f"B4-{n_automata}")
     automata_lst = str(automata).split('\n')
     start_y = get_middle(len(automata_lst) * ' ', height)
     no_change: bool = False
