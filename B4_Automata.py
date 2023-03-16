@@ -66,6 +66,12 @@ class Automata:
     """
 
     def __init__(self, source_file="", output_file="automata", out_type="gif"):
+        """
+        :param source_file: Populate the automata from a file
+        :param output_file: Name the output file
+        :param out_type: Set the format of the output file
+        :return: Nothing
+        """
         self.entrees: list[str] = []
         self.exits: list[str] = []
         self.transitions: dict[str, dict[str, list[str]]] = {}
@@ -78,18 +84,27 @@ class Automata:
         if source_file:
             self._populate_from_file_(self.source)
 
-    def __str__(self):
+        if self.is_e_nfa():
+            self.alphabet += 'ε'
+
+    def __str__(self) -> str:
+        """
+        :return: A table of the automaton
+        """
         headers = ["E/S", "État"] + self.alphabet
         table = [
             [
                 self._give_state_behaviour_(k),
                 k,
             ] + [','.join(self._fetch_transition_(k, x)) for x in self.alphabet]
-            for k in self.transitions.keys()]
+            for k in self]
 
         return tabulate.tabulate(table, headers, tablefmt="rounded_grid")
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """
+        :return: A string
+        """
         try:
             os.mkdir("out")
             os.mkdir("dot")
@@ -105,19 +120,53 @@ class Automata:
 
         return ''
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
+        """
+        :param other: Compare the current object with another
+        :return: True if the two states are equal and false otherwise
+        """
         return self.transitions == other.transitions \
             and self.entrees == other.entrees \
             and self.exits == other.exists
 
-    def __len__(self):
-        return len(self.transitions.keys())
+    def __len__(self) -> int:
+        """
+        :return: The number of states in the mdp
+        """
+        return len(self._get_states_())
+
+    def __setitem__(self, key, value):
+        """
+        :param key: Determine the state that is being changed
+        :param value: Set the value of a key in the dictionary
+        :return: None
+        """
+        self.transitions[key] = value
+
+    def __contains__(self, item):
+        """
+        :param item: Check if the item is in the list of states
+        :return: True if the item is in the list of states, and false otherwise
+        """
+        return item in self._get_states_()
+
+    def __getitem__(self, key):
+        """
+        :param key: Access the value in a dictionary
+        :return: The value associated with the key
+        """
+        return self.transitions.get(key)
+
+    def __iter__(self):
+        """
+        :return: An iterator over the states in the list
+        """
+        return iter(self._get_states_())
 
     def _give_state_behaviour_(self, state: str, arrows: bool = True) -> str:
         """
         Returns an indication of the initial or/and terminal behaviour of a state.
-
-        :param self: Refer to the object itself
+        
         :param state: str: Indicate the state to analyse
         :param arrows: bool: Indicate whether the fancy notation or with letters should be used
         :return: An indication of initial or/and terminal behaviour of the state
@@ -137,19 +186,20 @@ class Automata:
         """
         Returns the list of states that are in the transition dict for a given state and letter.
         If there is no such state, it will return an empty list.
-
-        :param self: Represent the instance of the class
+        
         :param state: str: The state
         :param letter: str: Get the letter that is being used to transition from one state to another
         :return: A list of states the state is going to with the letter
         """
-        return self.transitions.get(state).get(letter) or []
+        if (t := self.transitions.get(state)) and (t := t.get(letter)):
+            return t.copy()
+
+        return []
 
     def _populate_from_file_(self, path: str) -> dict[str, dict[str, list[str]]]:
         """
         Fills the transition dict with a .txt file.
-
-        :param self: Refer to the object itself
+        
         :param path: str: Get the path of the file
         :return: The `self.transitions` dict
         """
@@ -171,31 +221,31 @@ class Automata:
                         break
                     state += val
 
-                if self.transitions.get(state):
+                if self[state]:
                     if self._fetch_transition_(state, line[pos]):
-                        self.transitions[state][line[pos]].append(line[pos + 1:])
-                        self.transitions[state][line[pos]].sort()
+                        self[state][line[pos]].append(line[pos + 1:])
+                        self[state][line[pos]].sort()
                     else:
-                        self.transitions[state][line[pos]] = [line[pos + 1:]]
+                        self[state][line[pos]] = [line[pos + 1:]]
                 else:
-                    self.transitions[state] = {line[pos]: [line[pos + 1:]]}
+                    self[state] = {line[pos]: [line[pos + 1:]]}
 
         # if I modify self.transitions directly it changes the size of the iter and breaks
         # it is equivalent ot a temp variable
         i_dont_want_to_break_things: dict[str, dict[str, list[str]]] = {}
 
         for i in self.entrees:
-            if i not in self.transitions.keys():
+            if i not in self:
                 i_dont_want_to_break_things[i] = {letter: [] for letter in self.alphabet}
 
         for i in self.exits:
-            if i not in self.transitions.keys():
+            if i not in self:
                 i_dont_want_to_break_things[i] = {letter: [] for letter in self.alphabet}
 
         for state, transitions in self.transitions.items():
             for letter, states in transitions.items():
                 for i in states:
-                    if i not in self.transitions.keys():
+                    if i not in self:
                         i_dont_want_to_break_things[i] = {letter: [] for letter in self.alphabet}
 
         self.transitions |= i_dont_want_to_break_things
@@ -210,8 +260,7 @@ class Automata:
             'state' : {
                 'letter' : [ 'state', ... ],  # The list of states can be empty, but there will always be at least one letter key.
                 ...                           # There may also be multiple letters for each state in this list.  This is why we need to reorganize it!
-
-        :param self: Access the attributes of the class
+        
         :return: A dictionary with the states as keys and a dictionary of transitions from that state as values
         """
         dic = {}
@@ -229,7 +278,7 @@ class Automata:
         """
         Checks if a state is empty.
 
-        :param self: Access the attributes of the class
+        
         :param state: str: Determine the state that is being checked
         :param letter: str: Check if the transition is empty
         :return: True if the state is empty
@@ -237,14 +286,21 @@ class Automata:
         return not self._fetch_transition_(state, letter) \
             or self._fetch_transition_(state, letter) == ['']
 
+    def _get_states_(self) -> list[str]:
+        """
+        Returns a list of all the states in the DFA.
+
+        :return: A list of all the states in a given fsa
+        """
+        return list(self.transitions.keys())
+
     def get_info(self):
         """
         Returns a string containing the following information:
             - The number of transitions in the automaton.
             - Whether it is standard, determinate and complete.
             - The alphabet used by the automaton.
-
-        :param self: Refer to the current object
+        
         :return: A string containing the information of the automaton
         """
         headers = ["Standard", "Déterministe", "Complet", "Transitions", "n°Entrée", "n°Sortie"]
@@ -263,8 +319,7 @@ class Automata:
     def is_e_nfa(self) -> bool:
         """
         Checks if the NFA is an epsilon-NFA.
-
-        :param self: Access the attributes of the class
+        
         :return: True if the machine has an epsilon transition
         """
         for state, transitions in self.transitions.items():
@@ -277,8 +332,7 @@ class Automata:
     def to_dot_format(self) -> str:
         """
         Converts the finite state machine into a dot format.
-
-        :param self: Refer to the current instance of a class
+        
         :return: A string in the dot format, which can be used to display the automaton graphically
         """
         to_dot = "digraph finite_state_machine { rankdir=LR\n"
@@ -306,8 +360,7 @@ class Automata:
     def is_standard(self) -> bool:
         """
         Checks if the automaton is standard.
-
-        :param self: Refer to the object itself
+        
         :return: True if the automaton is standard, and false otherwise
         """
         if len(self.entrees) != 1:
@@ -323,8 +376,7 @@ class Automata:
     def get_standard(self) -> Automata:
         """
         Transforms a non-standard automata into a standard one.
-
-        :param self: Refer to the instance of the class
+        
         :return: A standard automaton
         """
         if self.is_standard():
@@ -332,7 +384,7 @@ class Automata:
 
         standard = deepcopy(self)
         dic = {}
-        for i in [standard.transitions.get(x) for x in standard.entrees]:
+        for i in [standard[x] for x in standard.entrees]:
             for k, v in i.items():
                 if dic.get(k):
                     dic[k] += v
@@ -340,7 +392,7 @@ class Automata:
                     dic[k] = v
                 dic[k] = list(set(dic[k]))
 
-        standard.transitions['I'] = dic
+        standard['I'] = dic
         standard.entrees = ['I']
 
         return standard
@@ -348,11 +400,10 @@ class Automata:
     def is_complete(self) -> bool:
         """
         Checks if the automata is complete.
-
-        :param self: Represent the instance of the class
+        
         :return: A boolean value
         """
-        for state in self.transitions.keys():
+        for state in self:
             for letter in self.alphabet:
                 if self._state_is_empty_(state, letter):
                     return False
@@ -362,8 +413,7 @@ class Automata:
         """
         Takes an automata and returns a complete version of it.
             If the automata is already complete, then it will return itself.
-
-        :param self: Refer to the current object
+        
         :return: A complete automata
         """
         if self.is_complete():
@@ -372,20 +422,19 @@ class Automata:
         complete = deepcopy(self)
         garbage = {letter: ['P'] for letter in self.alphabet}
 
-        complete.transitions['P'] = garbage
+        complete['P'] = garbage
 
-        for state in self.transitions.keys():
+        for state in self:
             for letter in self.alphabet:
                 if self._state_is_empty_(state, letter):
-                    complete.transitions[state][letter] = ['P']
+                    complete[state][letter] = ['P']
 
         return complete
 
     def is_determinate(self) -> bool:
         """
         Checks if the automaton is determinate.
-
-        :param self: Refer to the object itself
+        
         :return: A boolean value that indicates whether the automaton is determinate
         """
         if len(self.entrees) != 1:
@@ -397,6 +446,117 @@ class Automata:
                     return False
 
         return True
+
+    def get_state_e_closure(self, state: str, letter: str = '') -> list[str]:
+        """
+        Returns a list of states that can be reached from the given state
+        by following epsilon transitions. If a letter is provided, then only those states reachable by an
+        epsilon transition followed by the given letter are returned.
+
+        :param state: str: Represent the state that we want to get the e-closure of
+        :param letter: str: Should we use letter mode
+        :return: A list of states that can be reached from the current state using ε-transitions
+        """
+        if not self.is_e_nfa():
+            return []
+
+        transitions: list[str] = self._fetch_transition_(state, 'ε')
+
+        letter_transitions: list[str] = []
+
+        if letter:
+            letter_transitions: list[str] = self._fetch_transition_(state, letter)
+
+        e_closure: list[str] = letter_transitions if letter else [state]
+
+        if transitions:
+            for i in transitions:
+                e_closure += self.get_state_e_closure(i, letter=letter)
+
+        return e_closure
+
+    def get_simplified(self):
+        """
+        Takes an automata and returns a new one with the same alphabet, entrees,
+        exits and transitions but with states renamed to be more readable.
+
+        :return: A simplified version of the automata
+        """
+        simplified = Automata()
+        simplified.alphabet = self.alphabet.copy()
+        new_states = {}
+
+        for i, v in enumerate(self):
+            new_states[v] = v if v in string.ascii_letters else str(i)
+
+        simplified.exits = [new_states.get(state) for state in self.exits]
+        simplified.entrees = [new_states.get(state) for state in self.entrees]
+
+        for state, new_state in new_states.items():
+            simplified[new_state] = {}
+            for letter in self.alphabet:
+                simplified[new_state][letter] = []
+                for i in self[state][letter]:
+                    simplified[new_state][letter] += [new_states.get(i)] or []
+
+        return simplified
+
+    def _get_e_determinized_(self, step: bool = False):
+        """
+        Converts an E-NFA into a DFA.
+
+        :return: The determinized version of the automata
+        """
+        if not self.is_e_nfa():
+            raise TypeError("Not an E-NFA!!")
+
+        determinate = Automata()
+        determinate.alphabet = self.alphabet.copy()[:-1]  # we remove the epsilon
+        # wea assume that the automata only has one accepting state
+
+        determinate.entrees = self.entrees.copy()
+
+        entree = determinate.entrees[0]
+
+        determinate[entree] = {letter: ['-'.join(self.get_state_e_closure(entree, letter=letter))] for letter in determinate.alphabet}
+
+        if self.exits[0] in self.get_state_e_closure(entree):
+            determinate.exits.append(entree)
+
+        buffer: list[str] = []
+
+        for letter in determinate.alphabet:
+            buffer += determinate._fetch_transition_(entree, letter) or []
+
+        while buffer:
+            cur_state = buffer.pop().strip()
+
+            if not cur_state or cur_state in determinate:
+                continue
+
+            determinate[cur_state] = {}
+
+            for letter in determinate.alphabet:
+                if cur_state in self:
+                    determinate[cur_state][letter] = ['-'.join(self.get_state_e_closure(cur_state, letter=letter))]
+
+                    if self.exits[0] in self.get_state_e_closure(cur_state):
+                        determinate.exits.append(cur_state)
+                else:
+                    determinate[cur_state][letter] = []
+                    for state in cur_state.strip().split('-'):
+                        if cloture := self.get_state_e_closure(state, letter=letter):
+                            determinate[cur_state][letter] += ['-'.join(cloture)]
+
+                        if self.exits[0] in self.get_state_e_closure(state):
+                            determinate.exits.append(cur_state)
+
+                determinate[cur_state][letter] = ['-'.join(determinate[cur_state][letter])]
+
+            for v in determinate[cur_state].values():
+                buffer += v if v != [''] else []
+
+        return determinate.get_complete()
 
     def get_determinized(self, step: bool = False) -> Automata | list[Automata]:
         """
@@ -411,12 +571,12 @@ class Automata:
         If there were multiple possible transitions for any given letter,
         these transitions will be combined into one state which contains all of them.
 
-        :param self: Access the attributes of the class
+
         :param step: bool: Determine if the function should return a list of automatas or just one
         :return: A list of automata objects if step is true, otherwise it returns a single automata object
         """
         if self.is_e_nfa():
-            return self
+            return self._get_e_determinized_(step=step)
 
         if self.is_determinate():
             if self.is_complete():
@@ -436,7 +596,7 @@ class Automata:
         # unite the entrees
         new_entree = {}
         for state in self.entrees:
-            for letter in self.transitions.get(state):
+            for letter in self[state]:
                 if n_e := new_entree.get(letter):
                     n_e += self._fetch_transition_(state, letter).copy()
                 else:
@@ -478,7 +638,7 @@ class Automata:
 
             det_tr[cur_state] = {}
 
-            if trans := self.transitions.get(cur_state):
+            if trans := self[cur_state]:
                 for letter, to_state in trans.items():
                     det_tr[cur_state][letter] = ['-'.join(to_state)]
 
@@ -493,10 +653,10 @@ class Automata:
                         determinate.exits.append(cur_state)
 
                 for letter in determinate.alphabet:
-                    det_tr.get(cur_state)[letter] = []
+                    det_tr[cur_state][letter] = []
 
                 for state in composing_states:
-                    for letter, to_state in self.transitions.get(state).items():
+                    for letter, to_state in self[state].items():
                         temp = det_tr.get(cur_state).get(letter)
                         temp += to_state
                         det_tr.get(cur_state)[letter] = list(set(temp))
@@ -524,7 +684,7 @@ class Automata:
         """
         Takes a word as an argument and returns True if the word is accepted by the automaton, and False otherwise.
 
-        :param self: Bind the method to an object
+        
         :param word: Test the word on the automaton
         :return: True if the word is accepted by the automaton and false otherwise
         """
@@ -549,20 +709,22 @@ class Automata:
     def get_minimized(self):
         """
         Minimizes the given automaton using the Moore's algorithm.
-
-        :param self: Access the attributes of the class
+        
         :return: A new minimized automata object
         """
         # Step 1: Convert the automaton to a determinate one
 
+        if self.is_e_nfa():
+            return self
+
         minimized = Automata()
-        minimized.transitions['0'] = {letter: ['0'] for letter in self.alphabet}
+        minimized['0'] = {letter: ['0'] for letter in self.alphabet}
         minimized.alphabet = self.alphabet.copy()
         minimized.entrees = ['0']
 
         if not len(self.exits):
             return minimized
-        elif len(self.entrees) == len(self.transitions.keys()):
+        elif len(self.entrees) == len(self):
             minimized.exits = ['0']
             return minimized
 
@@ -632,7 +794,7 @@ class Automata:
                     minimized.exits.append(state)
                 if i in determinized.entrees:
                     minimized.entrees.append(state)
-                minimized.transitions[state] |= determinized.transitions.get(i)
+                minimized[state] |= determinized[i]
 
         minimized.exits = list(set(minimized.exits))
         minimized.entrees = list(set(minimized.entrees))
@@ -646,7 +808,7 @@ class Automata:
         """
         Returns a new DFA that accepts the complement of the language accepted by this DFA.
         The complement is defined as all strings not in the language.
-        :param self: Access the attributes of the class
+        
         :return: The complementary of the automaton
         """
         complementary = deepcopy(self.get_determinized())

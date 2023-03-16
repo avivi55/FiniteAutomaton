@@ -4,11 +4,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="Documentations">
-      <change beforePath="$PROJECT_DIR$/B4_Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_Application.py" afterDir="false" />
+    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="yes">
+      <change beforePath="$PROJECT_DIR$/.idea/L2FiniteAutomaton.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/L2FiniteAutomaton.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/B4_Automata.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_Automata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B4_AutomataAnimation.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_AutomataAnimation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/anim/automata/strandardize.gif" beforeDir="false" afterPath="$PROJECT_DIR$/anim/automata/strandardize.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/automaton/B4-0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/automaton/B4-0.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-0.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-1.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-10.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-11.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-12.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-13.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-14.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-15.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-16.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-17.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-18.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-19.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-2.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-20.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-21.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-22.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-23.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-24.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-25.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-26.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-27.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-28.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-29.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-3.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-30.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-31.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-32.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-33.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-34.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-4.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-5.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-6.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-7.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-8.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/B4-9.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dot/automata.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/automata.gif" beforeDir="false" afterPath="$PROJECT_DIR$/out/automata.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +78,7 @@
         <entry key="$PROJECT_DIR$" value="minimizing" />
       </map>
     </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -185,8 +225,8 @@
       <workItem from="1678212187239" duration="2444000" />
       <workItem from="1678265115200" duration="11886000" />
       <workItem from="1678308870966" duration="44514000" />
-      <workItem from="1678480552747" duration="1859000" />
-      <workItem from="1678799914600" duration="6854000" />
+      <workItem from="1678480552747" duration="1237000" />
+      <workItem from="1678889672954" duration="26406000" />
     </task>
     <task id="LOCAL-00001" summary="added main loop, better formating">
       <created>1677231392963</created>
@@ -379,6 +419,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/L2FiniteAutomaton$main.coverage" NAME="main Coverage Results" MODIFIED="1678197259341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/L2FiniteAutomaton$Application.coverage" NAME="Application Coverage Results" MODIFIED="1678282580636" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$tests.coverage" NAME="tests Coverage Results" MODIFIED="1678719049652" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/L2FiniteAutomaton$tests.coverage" NAME="tests Coverage Results" MODIFIED="1678966144867" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
