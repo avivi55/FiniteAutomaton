@@ -4,125 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="screen leak bug fixed on long automata">
+    <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="cleaning + Better folders">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B4_Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_Application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B4_Automata.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_Automata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/B4_Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/B4_Application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/B4_Automata.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/B4_Automata.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/B4_AutomataAnimation.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_AutomataAnimation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-0/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-0/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-1/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-1/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-10/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-10/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-11/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-11/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-12/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-12/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-13/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-13/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-14/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-14/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-15/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-15/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-16/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-16/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-17/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-17/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-18/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-18/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-19/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-19/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-2/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-2/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-20/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-20/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-21/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-21/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-22/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-22/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-23/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-23/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-24/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-24/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-25/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-25/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-26/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-26/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-27/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-27/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-28/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-28/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-29/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-29/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-3/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-3/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-30/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-30/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-31/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-32/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-33/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-34/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-35/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-36/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-37/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-38/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-39/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-4/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-4/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-40/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-41/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-42/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-43/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-5/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-5/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-6/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-6/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-7/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-7/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-8/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-8/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-9/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/B4-9/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/automata/determinize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anim/automata/strandardize.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-0.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-1.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-10.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-11.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-12.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-13.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-14.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-15.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-16.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-17.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-18.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-19.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-2.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-20.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-21.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-22.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-23.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-24.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-25.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-26.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-27.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-28.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-29.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-3.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-30.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-31.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-32.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-33.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-34.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-4.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-5.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-6.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-7.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-8.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/B4-9.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/automata.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/dot/automata.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/B4_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,6 +76,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/classes" />
       <recent name="$PROJECT_DIR$/automaton" />
     </key>
   </component>
@@ -303,7 +192,7 @@
       <workItem from="1678480552747" duration="1237000" />
       <workItem from="1678889672954" duration="26406000" />
       <workItem from="1678966246771" duration="24000" />
-      <workItem from="1678976342438" duration="7272000" />
+      <workItem from="1678976342438" duration="8438000" />
     </task>
     <task id="LOCAL-00001" summary="added main loop, better formating">
       <created>1677231392963</created>
@@ -459,7 +348,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678981698425</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="cleaning + Better folders">
+      <created>1678995080411</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1678995080411</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -496,7 +392,8 @@
     <MESSAGE value="Documentations" />
     <MESSAGE value="e determinize and cleaning" />
     <MESSAGE value="screen leak bug fixed on long automata" />
-    <option name="LAST_COMMIT_MESSAGE" value="screen leak bug fixed on long automata" />
+    <MESSAGE value="cleaning + Better folders" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaning + Better folders" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
