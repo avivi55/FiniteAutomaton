@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e241f03-ef69-4427-9b99-2083bececcc5" name="Changes" comment="cleaning + Better folders">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B4_Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/B4_Application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B4_Automata.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/B4_Automata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B4_AutomataAnimation.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_AutomataAnimation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B4_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/B4_Automata.py" beforeDir="false" afterPath="$PROJECT_DIR$/B4_Automata.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +73,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/classes" />
       <recent name="$PROJECT_DIR$/automaton" />
     </key>
@@ -192,7 +190,7 @@
       <workItem from="1678480552747" duration="1237000" />
       <workItem from="1678889672954" duration="26406000" />
       <workItem from="1678966246771" duration="24000" />
-      <workItem from="1678976342438" duration="8438000" />
+      <workItem from="1678976342438" duration="10640000" />
     </task>
     <task id="LOCAL-00001" summary="added main loop, better formating">
       <created>1677231392963</created>
@@ -355,7 +353,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678995080411</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="cleaning + Better folders">
+      <created>1678996387527</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1678996387527</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

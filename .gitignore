@@ -1,3 +1,7 @@
 *.pdf
 *.gv
 ./.idea
+tex/
+tests.py
+out
+tests.py

@@ -92,6 +92,15 @@ class Automata:
 
     @staticmethod
     def __cut_in_half__(table: list[list[str]], headers: list[str]):
+        """
+        The __cut_in_half__ function takes a table and cuts it in half, then
+        recombines the two halves by alternating lines. This is useful for
+        displaying tables that are too wide to fit on the screen.
+
+        :param table: list[list[str]]: Store the table that is being printed
+        :param headers: list[str]: Specify the headers for the table
+        :return: A string that is the table cut in half
+        """
         idx = len(table) // 2
 
         tb1 = table[:idx]
@@ -540,7 +549,7 @@ class Automata:
 
         determinate = Automata()
         determinate.alphabet = self.alphabet.copy()[:-1]  # we remove the epsilon
-        # wea assume that the automata only has one accepting state
+        # we assume that the automata only has one accepting state
 
         determinate.entrees = self.entrees.copy()
 
