@@ -5,7 +5,4 @@ tex/
 tests.py
 out/
 tests.py
-/__pychache__/*
-__pycache__/B4_Application.cpython-310.pyc
-__pycache__/B4_Automata.cpython-310.pyc
-__pycache__/B4_AutomataAnimation.cpython-310.pyc
+__pycache__/
