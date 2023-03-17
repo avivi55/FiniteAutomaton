@@ -1,8 +1,7 @@
 .idea/
 .venv/
 .vscode/
-tex/*
-out/
+
 __pycache__/
 
 *.pdf
@@ -10,4 +9,7 @@ __pycache__/
 
 tests.py
 
+tex/*
 !/tex/rapport.pdf
+out/*
+!/out/tests

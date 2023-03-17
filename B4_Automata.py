@@ -11,7 +11,6 @@ from pathlib import Path
 global MAX_HEIGHT
 MAX_HEIGHT = 45
 
-
 def open_image(path):
     """
     Opens an image in the default viewer for the operating system.
@@ -25,7 +24,7 @@ def open_image(path):
     subprocess.Popen([command, Path(path)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-class Automata:
+class Automata(object):
     """
     A class to represent an automata.
 
@@ -85,15 +84,14 @@ class Automata:
         self.format: str = out_type
 
         if source_file:
-            self._populate_from_file_(self.source)
+            self.__populate_from_file(self.source)
 
-        if self.is_e_nfa():
+        if self.__is_e_nfa():
             self.alphabet += 'ε'
 
-    @staticmethod
-    def __cut_in_half__(table: list[list[str]], headers: list[str]):
+    def __cut_in_half(self, table: list[list[str]], headers: list[str]):
         """
-        The __cut_in_half__ function takes a table and cuts it in half, then
+        Takes a table and cuts it in half, then
         recombines the two halves by alternating lines. This is useful for
         displaying tables that are too wide to fit on the screen.
 
@@ -105,6 +103,9 @@ class Automata:
 
         tb1 = table[:idx]
         tb2 = table[idx:]
+
+        if len(tb2) > len(tb1):
+            tb1.append(tb2.pop(0))
 
         res1 = tabulate.tabulate(tb1, headers, tablefmt="simple_grid").split('\n')
         res2 = tabulate.tabulate(tb2, headers, tablefmt="simple_grid").split('\n')[::-1]
@@ -123,17 +124,15 @@ class Automata:
         headers = ["E/S", "État"] + self.alphabet
         table = [
             [
-                self._give_state_behaviour_(k),
+                self.__give_state_behaviour(k),
                 k,
-            ] + [','.join(self._fetch_transition_(k, x)) for x in self.alphabet]
+            ] + [','.join(self.__fetch_transition(k, x)) for x in self.alphabet]
             for k in self]
 
         res = tabulate.tabulate(table, headers, tablefmt="simple_grid")
-
-        print(len(res.split('\n')))
-
+        
         if len(res.split('\n')) > MAX_HEIGHT:
-            res = self.__cut_in_half__(table, headers)
+            res = self.__cut_in_half(table, headers)
 
         return res
 
@@ -170,7 +169,7 @@ class Automata:
         """
         :return: The number of states in the mdp
         """
-        return len(self._get_states_())
+        return len(self.__get_states())
 
     def __setitem__(self, key, value):
         """
@@ -185,7 +184,7 @@ class Automata:
         :param item: Check if the item is in the list of states
         :return: True if the item is in the list of states, and false otherwise
         """
-        return item in self._get_states_()
+        return item in self.__get_states()
 
     def __getitem__(self, key):
         """
@@ -198,9 +197,9 @@ class Automata:
         """
         :return: An iterator over the states in the list
         """
-        return iter(self._get_states_())
+        return iter(self.__get_states())
 
-    def _give_state_behaviour_(self, state: str, arrows: bool = True) -> str:
+    def __give_state_behaviour(self, state: str, arrows: bool = True) -> str:
         """
         Returns an indication of the initial or/and terminal behaviour of a state.
         
@@ -219,7 +218,7 @@ class Automata:
 
         return ''
 
-    def _fetch_transition_(self, state: str, letter: str) -> list[str]:
+    def __fetch_transition(self, state: str, letter: str) -> list[str]:
         """
         Returns the list of states that are in the transition dict for a given state and letter.
         If there is no such state, it will return an empty list.
@@ -233,7 +232,7 @@ class Automata:
 
         return []
 
-    def _populate_from_file_(self, path: str) -> dict[str, dict[str, list[str]]]:
+    def __populate_from_file(self, path: str) -> dict[str, dict[str, list[str]]]:
         """
         Fills the transition dict with a .txt file.
         
@@ -259,7 +258,7 @@ class Automata:
                     state += val
 
                 if self[state]:
-                    if self._fetch_transition_(state, line[pos]):
+                    if self.__fetch_transition(state, line[pos]):
                         self[state][line[pos]].append(line[pos + 1:])
                         self[state][line[pos]].sort()
                     else:
@@ -289,7 +288,7 @@ class Automata:
 
         return self.transitions
 
-    def _different_transitions_dict_(self) -> dict[str, dict[str, list]]:
+    def __different_transitions_dict(self) -> dict[str, dict[str, list]]:
         """
         Takes the transitions dictionary and reorganizes it.
         The original transitions dictionary has the following structure:
@@ -311,7 +310,7 @@ class Automata:
                         dic[state][i] = [k]
         return dic
 
-    def _state_is_empty_(self, state: str, letter: str) -> bool:
+    def __is_state_empty(self, state: str, letter: str) -> bool:
         """
         Checks if a state is empty.
 
@@ -320,10 +319,10 @@ class Automata:
         :param letter: str: Check if the transition is empty
         :return: True if the state is empty
         """
-        return not self._fetch_transition_(state, letter) \
-            or self._fetch_transition_(state, letter) == ['']
+        return not self.__fetch_transition(state, letter) \
+            or self.__fetch_transition(state, letter) == ['']
 
-    def _get_states_(self) -> list[str]:
+    def __get_states(self) -> list[str]:
         """
         Returns a list of all the states in the DFA.
 
@@ -353,7 +352,7 @@ class Automata:
         return f"{tabulate.tabulate(table, headers, tablefmt='rounded_grid')}\n" \
                f"{tabulate.tabulate([['{' + ', '.join(self.alphabet) + '}']], ['Alphabet'], tablefmt='rounded_grid')}"
 
-    def is_e_nfa(self) -> bool:
+    def __is_e_nfa(self) -> bool:
         """
         Checks if the NFA is an epsilon-NFA.
         
@@ -386,7 +385,7 @@ class Automata:
 
         to_dot += '\n'
 
-        for state, transitions in self._different_transitions_dict_().items():
+        for state, transitions in self.__different_transitions_dict().items():
             for k, v in transitions.items():
                 if k:
                     to_dot += f"\t\"{state}\" -> \"{k}\" [label=\"{str(', '.join(v))}\"] \n"
@@ -442,7 +441,7 @@ class Automata:
         """
         for state in self:
             for letter in self.alphabet:
-                if self._state_is_empty_(state, letter):
+                if self.__is_state_empty(state, letter):
                     return False
         return True
 
@@ -457,13 +456,13 @@ class Automata:
             return self
 
         complete = deepcopy(self)
-        garbage = {letter: ['P'] for letter in self.alphabet}
+        #garbage = {letter: ['P'] for letter in self.alphabet}
 
-        complete['P'] = garbage
+        complete['P'] = {letter: ['P'] for letter in self.alphabet}
 
         for state in self:
             for letter in self.alphabet:
-                if self._state_is_empty_(state, letter):
+                if self.__is_state_empty(state, letter):
                     complete[state][letter] = ['P']
 
         return complete
@@ -484,7 +483,7 @@ class Automata:
 
         return True
 
-    def get_state_e_closure(self, state: str, letter: str = '') -> list[str]:
+    def __get_state_e_closure(self, state: str, letter: str = '') -> list[str]:
         """
         Returns a list of states that can be reached from the given state
         by following epsilon transitions. If a letter is provided, then only those states reachable by an
@@ -494,21 +493,21 @@ class Automata:
         :param letter: str: Should we use letter mode
         :return: A list of states that can be reached from the current state using ε-transitions
         """
-        if not self.is_e_nfa():
+        if not self.__is_e_nfa():
             return []
 
-        transitions: list[str] = self._fetch_transition_(state, 'ε')
+        transitions: list[str] = self.__fetch_transition(state, 'ε')
 
         letter_transitions: list[str] = []
 
         if letter:
-            letter_transitions: list[str] = self._fetch_transition_(state, letter)
+            letter_transitions: list[str] = self.__fetch_transition(state, letter)
 
         e_closure: list[str] = letter_transitions if letter else [state]
 
         if transitions:
             for i in transitions:
-                e_closure += self.get_state_e_closure(i, letter=letter)
+                e_closure += self.__get_state_e_closure(i, letter=letter)
 
         return e_closure
 
@@ -538,13 +537,13 @@ class Automata:
 
         return simplified
 
-    def _get_e_determinized_(self, step: bool = False):
+    def __get_e_determinized(self, step: bool = False):
         """
         Converts an E-NFA into a DFA.
 
         :return: The determinized version of the automata
         """
-        if not self.is_e_nfa():
+        if not self.__is_e_nfa():
             raise TypeError("Not an E-NFA!!")
 
         determinate = Automata()
@@ -555,15 +554,15 @@ class Automata:
 
         entree = determinate.entrees[0]
 
-        determinate[entree] = {letter: ['-'.join(self.get_state_e_closure(entree, letter=letter))] for letter in determinate.alphabet}
+        determinate[entree] = {letter: ['-'.join(self.__get_state_e_closure(entree, letter=letter))] for letter in determinate.alphabet}
 
-        if self.exits[0] in self.get_state_e_closure(entree):
+        if self.exits[0] in self.__get_state_e_closure(entree):
             determinate.exits.append(entree)
 
         buffer: list[str] = []
 
         for letter in determinate.alphabet:
-            buffer += determinate._fetch_transition_(entree, letter) or []
+            buffer += determinate.__fetch_transition(entree, letter) or []
 
         while buffer:
             cur_state = buffer.pop().strip()
@@ -575,17 +574,17 @@ class Automata:
 
             for letter in determinate.alphabet:
                 if cur_state in self:
-                    determinate[cur_state][letter] = ['-'.join(self.get_state_e_closure(cur_state, letter=letter))]
+                    determinate[cur_state][letter] = ['-'.join(self.__get_state_e_closure(cur_state, letter=letter))]
 
-                    if self.exits[0] in self.get_state_e_closure(cur_state):
+                    if self.exits[0] in self.__get_state_e_closure(cur_state):
                         determinate.exits.append(cur_state)
                 else:
                     determinate[cur_state][letter] = []
                     for state in cur_state.strip().split('-'):
-                        if cloture := self.get_state_e_closure(state, letter=letter):
+                        if cloture := self.__get_state_e_closure(state, letter=letter):
                             determinate[cur_state][letter] += ['-'.join(cloture)]
 
-                        if self.exits[0] in self.get_state_e_closure(state):
+                        if self.exits[0] in self.__get_state_e_closure(state):
                             determinate.exits.append(cur_state)
 
                 determinate[cur_state][letter] = ['-'.join(determinate[cur_state][letter])]
@@ -612,8 +611,8 @@ class Automata:
         :param step: bool: Determine if the function should return a list of automatas or just one
         :return: A list of automata objects if step is true, otherwise it returns a single automata object
         """
-        if self.is_e_nfa():
-            return self._get_e_determinized_(step=step)
+        if self.__is_e_nfa():
+            return self.__get_e_determinized(step=step)
 
         if self.is_determinate():
             if self.is_complete():
@@ -635,9 +634,9 @@ class Automata:
         for state in self.entrees:
             for letter in self[state]:
                 if n_e := new_entree.get(letter):
-                    n_e += self._fetch_transition_(state, letter).copy()
+                    n_e += self.__fetch_transition(state, letter).copy()
                 else:
-                    new_entree[letter] = self._fetch_transition_(state, letter).copy()
+                    new_entree[letter] = self.__fetch_transition(state, letter).copy()
 
                 new_entree[letter] = sorted(list(set(new_entree[letter])))
 
@@ -734,7 +733,7 @@ class Automata:
         cur_state = self.entrees[0]
 
         for i, letter in enumerate(word):
-            next_state = self._fetch_transition_(cur_state, letter)[0]
+            next_state = self.__fetch_transition(cur_state, letter)[0]
 
             cur_state = next_state
 
@@ -751,7 +750,7 @@ class Automata:
         """
         # Step 1: Convert the automaton to a determinate one
 
-        if self.is_e_nfa():
+        if self.__is_e_nfa():
             return self
 
         minimized = Automata()
@@ -786,7 +785,7 @@ class Automata:
             for letter in determinized.alphabet:
                 transitions = {}
                 for state in group:
-                    for to_state in determinized._fetch_transition_(state, letter):
+                    for to_state in determinized.__fetch_transition(state, letter):
                         for i, part in enumerate(partition):
                             if to_state in part:
                                 transitions.setdefault(i, []).append(state)
