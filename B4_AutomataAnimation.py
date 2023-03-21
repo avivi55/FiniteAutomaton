@@ -4,6 +4,8 @@ import os
 from PIL import Image
 from pathlib import Path
 
+global DIR
+DIR = os.path.dirname(os.path.realpath(__file__))
 
 def scale(image, max_size, method=Image.ANTIALIAS):
     """
@@ -31,6 +33,8 @@ class AutomataAnimation:
         os.mkdir(f"out/anim")
     except FileExistsError:
         ...
+    except FileNotFoundError:
+        ...
 
     @staticmethod
     def standardize_animation(automata: Automata, view: bool = False):
@@ -42,14 +46,14 @@ class AutomataAnimation:
         :return: A string
         """
         try:
-            os.mkdir(Path(f"out/anim/{automata.output}"))
+            os.mkdir(Path(DIR) / Path(f"out/anim/{automata.output}"))
         except FileExistsError:
             ...
 
         file = f'out/anim/{automata.output}/{automata.output}'
 
-        file_names = [f'{file}_base.png',
-                      f'{file}_std.png']
+        file_names = [f'{DIR}/{file}_base.png',
+                      f'{DIR}/{file}_std.png']
 
         graphviz.Source(automata.to_dot_format()) \
             .render(outfile=f'{file_names[0]}', format='png', view=False)
@@ -61,15 +65,15 @@ class AutomataAnimation:
         m = max([im.size for im in images])
         images = [scale(img, m) for img in images]
 
-        images[0].save(Path(f"out/anim/{automata.output}/strandardize.gif"),
+        images[0].save(Path(DIR) / Path(f"out/anim/{automata.output}/strandardize.gif"),
                        save_all=True, append_images=images[1:], optimize=False, duration=2000, loop=0)
 
         if view:
-            open_image(Path(f"out/anim/{automata.output}/strandardize.gif"))
+            open_image(Path(DIR) / Path(f"out/anim/{automata.output}/strandardize.gif"))
 
         for f in file_names:
-            os.remove(Path(f))
-            os.remove(Path(f.replace("png", "gv")))
+            os.remove(Path(DIR) / Path(f))
+            os.remove(Path(DIR) / Path(f.replace("png", "gv")))
 
         return ''
 
@@ -93,7 +97,7 @@ class AutomataAnimation:
 
         file = f'out/anim/{automata.output}/{automata.output}'
 
-        file_names = [f'{file}_{i}.png' for i in range(len(steps))]
+        file_names = [f'{DIR}/{file}_{i}.png' for i in range(len(steps))]
 
         for f, s in zip(file_names, steps):
             graphviz.Source(s.to_dot_format()) \
@@ -103,14 +107,14 @@ class AutomataAnimation:
         m = max([im.size for im in images])
         images = [scale(img, m) for img in images]
 
-        images[0].save(Path(f"out/anim/{automata.output}/determinize.gif"),
+        images[0].save(Path(DIR) / Path(f"out/anim/{automata.output}/determinize.gif"),
                        save_all=True, append_images=images[1:], optimize=False, duration=duration * 1000, loop=0)
 
         if view:
-            open_image(Path(f"out/anim/{automata.output}/determinize.gif"))
+            open_image(Path(DIR) / Path(f"out/anim/{automata.output}/determinize.gif"))
 
         for f in file_names:
-            os.remove(Path(f))
+            os.remove(Path(DIR) / Path(f))
             os.remove(Path(f.replace("png", "gv")))
 
         return ''

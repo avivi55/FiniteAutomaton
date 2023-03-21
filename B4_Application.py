@@ -5,6 +5,10 @@ import types
 import B4_Automata
 from B4_AutomataAnimation import AutomataAnimation as Anim
 
+import os
+global DIR
+DIR = os.path.dirname(os.path.realpath(__file__))
+
 
 def get_middle(text, width):
     """

@@ -11,6 +11,9 @@ from pathlib import Path
 global MAX_HEIGHT
 MAX_HEIGHT = 45
 
+global DIR
+DIR = os.path.dirname(os.path.realpath(__file__))
+
 def open_image(path):
     """
     Opens an image in the default viewer for the operating system.
@@ -148,11 +151,11 @@ class Automata(object):
             pass
 
         graphviz.Source(self.to_dot_format()) \
-            .render(filename=Path(f'out/{self.output}.dot'), outfile=Path(f'out/{self.output}.{self.format}'), view=False)
+            .render(filename=Path(DIR) / Path(f'out/{self.output}.dot'), outfile=Path(DIR) / Path(f'out/{self.output}.{self.format}'), view=False, format=self.format)
 
-        os.remove(Path(f'out/{self.output}.dot'))
+        os.remove(Path(DIR) / Path(f'out/{self.output}.dot'))
 
-        open_image(Path(f'out/{self.output}.{self.format}'))
+        open_image(Path(DIR) / Path(f'out/{self.output}.{self.format}'))
 
         return ''
 
@@ -227,8 +230,9 @@ class Automata(object):
         :param letter: str: Get the letter that is being used to transition from one state to another
         :return: A list of states the state is going to with the letter
         """
-        if (t := self.transitions.get(state)) and (t := t.get(letter)):
-            return t.copy()
+        if self[state]:
+            if self[state].get(letter):
+                return self[state][letter].copy()
 
         return []
 
@@ -239,7 +243,7 @@ class Automata(object):
         :param path: str: Get the path of the file
         :return: The `self.transitions` dict
         """
-        with open(path, 'r') as f:
+        with open(Path(DIR) / Path(path), 'r') as f:
             fa_data = f.readlines()
 
             self.alphabet = list(string.ascii_lowercase[:int(fa_data[0])])
@@ -270,13 +274,13 @@ class Automata(object):
         # it is equivalent ot a temp variable
         i_dont_want_to_break_things: dict[str, dict[str, list[str]]] = {}
 
-        for i in self.entrees:
-            if i not in self:
-                i_dont_want_to_break_things[i] = {letter: [] for letter in self.alphabet}
+        for state in self.entrees:
+            if state not in self:
+                i_dont_want_to_break_things[state] = {letter: [] for letter in self.alphabet}
 
-        for i in self.exits:
-            if i not in self:
-                i_dont_want_to_break_things[i] = {letter: [] for letter in self.alphabet}
+        for state in self.exits:
+            if state not in self:
+                i_dont_want_to_break_things[state] = {letter: [] for letter in self.alphabet}
 
         for state, transitions in self.transitions.items():
             for letter, states in transitions.items():
@@ -313,7 +317,6 @@ class Automata(object):
     def __is_state_empty(self, state: str, letter: str) -> bool:
         """
         Checks if a state is empty.
-
         
         :param state: str: Determine the state that is being checked
         :param letter: str: Check if the transition is empty
@@ -374,8 +377,8 @@ class Automata(object):
         to_dot = "digraph finite_state_machine { rankdir=LR\n"
 
         to_dot += "\tnode [shape=doublecircle]\n"
-        for exit_ in self.exits:
-            to_dot += f"\t\"{exit_}\"\n"
+        for _exit in self.exits:
+            to_dot += f"\t\"{_exit}\"\n"
 
         to_dot += '\n'
 
@@ -397,14 +400,15 @@ class Automata(object):
         """
         Checks if the automaton is standard.
         
-        :return: True if the automaton is standard, and false otherwise
+        :return: If the automaton is standard
         """
         if len(self.entrees) != 1:
             return False
 
         for transitions in self.transitions.values():
-            for transition in transitions:
-                if self.entrees[0] in transition:
+            for letter, states in transitions.items():
+                print(states)
+                if self.entrees[0] in states:
                     return False
 
         return True
@@ -419,16 +423,16 @@ class Automata(object):
             return self
 
         standard = deepcopy(self)
-        dic = {}
+        i_transitions: dict[str, list[str]] = {}
         for i in [standard[x] for x in standard.entrees]:
             for k, v in i.items():
-                if dic.get(k):
-                    dic[k] += v
+                if i_transitions.get(k):
+                    i_transitions[k] += v
                 else:
-                    dic[k] = v
-                dic[k] = list(set(dic[k]))
+                    i_transitions[k] = v
+                i_transitions[k] = list(set(i_transitions[k]))
 
-        standard['I'] = dic
+        standard['I'] = i_transitions
         standard.entrees = ['I']
 
         return standard
