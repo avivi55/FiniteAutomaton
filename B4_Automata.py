@@ -407,7 +407,7 @@ class Automata(object):
 
         for transitions in self.transitions.values():
             for letter, states in transitions.items():
-                print(states)
+                # print(states)
                 if self.entrees[0] in states:
                     return False
 
@@ -728,16 +728,16 @@ class Automata(object):
         :param word: Test the word on the automaton
         :return: True if the word is accepted by the automaton and false otherwise
         """
-        if False in [letter in self.alphabet + ['E', 'ε'] for letter in word]:
-            return False
-
         if not self.is_determinate():
             return False
 
         cur_state = self.entrees[0]
 
         for i, letter in enumerate(word):
-            next_state = self.__fetch_transition(cur_state, letter)[0]
+            if (next_state:=self.__fetch_transition(cur_state, letter)):
+                next_state = next_state[0]
+            else:
+                return False
 
             cur_state = next_state
 
