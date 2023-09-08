@@ -7,7 +7,7 @@ from pathlib import Path
 global DIR
 DIR = os.path.dirname(os.path.realpath(__file__))
 
-def scale(image, max_size, method=Image.ANTIALIAS):
+def scale(image, max_size, method=Image.LANCZOS):
     """
     Takes an image, a max_size tuple and a method.
     The function resizes the image to the max_size keeping the aspect ratio
